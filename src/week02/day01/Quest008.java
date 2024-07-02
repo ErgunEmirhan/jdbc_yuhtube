@@ -10,7 +10,7 @@ public class Quest008 {
 		int num = sc.nextInt();
 		
 		for (int i = 1; i <= num; i++){
-			fakt = fakt*i;
+			fakt *= i;
 		}
 		System.out.println(fakt);
 	}

@@ -14,5 +14,7 @@ public class Quest007 {
 		
 		boolean isEven = sum % 2 == 0;
 		System.out.println(isEven ? "Çift":"Tek");
+		
+		System.out.println("Girdiğiniz sayilarin ortalamasi: " + (num1+num2)/2);
 	}
 }
