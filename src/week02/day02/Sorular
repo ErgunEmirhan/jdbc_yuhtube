@@ -1,0 +1,28 @@
+[09:49] Alperen Ikinci (BilgeAdam Boost)
+1- Dışarıdan taban değeri ve üs isimli 2 tane değişken alınacak. (2 üzeri 5 gibi) tabanın kuvvetini hesaplamak istiyorum.
+Hesaplamayı yaptıktan sonra, kullanıcıya ismini soracağım. Sonra çıktı olarak; "kullaniciIsmi + "n üzeri x isleminin sonucu " "
+ like 11
+
+[09:50] Alperen Ikinci (BilgeAdam Boost)
+2- a'dan z'ye alfabeyi yazdıralım.
+ like 14
+
+[09:50] Alperen Ikinci (BilgeAdam Boost)
+3- Klavyeden 0 girilinceye kadar sayı okumaya devam edelim. 0 girildiğinde sayıların toplamını ve ortalamasını ekrana yazdıralım.
+ like 10
+
+[09:53] Alperen Ikinci (BilgeAdam Boost)
+4- Kulanıcının girdiği sayının çarpım tablosunu yazdıran program. (Kullanıcı 7 girdiğinde 7'nin çarpım tablosu elemanları görünecek. )
+ like 8
+
+[10:17] Alperen Ikinci (BilgeAdam Boost)
+5- 1'den 100'e kadar olan çift sayıların toplamının, tek sayıların toplamına olan oranını bulan program.
+ like 11
+
+[10:36] Alperen Ikinci (BilgeAdam Boost)
+6- Telefon kodu ve Email kodumuz olsun (Numerik ve bunları elle girebiliriz) Sonrasında kullanıcıdan kodları girmesini isteyeceğiz, e-mail kodu hatalıysa ona göre bir mesaj, sms kodu hatalıysa ona göre bir mesaj, ikisi de doğru girildiğinde de "Başarıyla giriş yaptınız".
+ like 8
+
+[10:45] Alperen Ikinci (BilgeAdam Boost)
+7- Girilen sayının 5'in kuvveti olup olmadığını bulan program.
+ like 7
