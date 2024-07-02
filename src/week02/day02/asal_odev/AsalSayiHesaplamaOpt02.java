@@ -26,8 +26,8 @@ public class AsalSayiHesaplamaOpt02 {
 			isPrime= false;
 		}
 		else {
-			double temp = Math.sqrt(num);
-			for (int i = 3; i < temp; i+=2) {
+			double root = Math.sqrt(num);
+			for (int i = 3; i < root; i+=2) {
 				if (num % i == 0) {
 					isPrime = false;
 					break;
