@@ -16,18 +16,12 @@ public class AsalSayiHesaplamaOpt02 {
 		num = sc.nextInt();
 		
 		// Asal sayıyı bulma işlemini yapan bölüm.
-		if (num < 2){
-			isPrime = false;
-		}
 		if (num == 2) {
 			isPrime = true;
 		}
-		else if (num % 2 == 0){
-			isPrime= false;
-		}
-		else {
+		else if (num % 2 != 0) {
 			double root = Math.sqrt(num);
-			for (int i = 3; i < root; i+=2) {
+			for (int i = 3; i < root; i += 2) {
 				if (num % i == 0) {
 					isPrime = false;
 					break;
@@ -37,7 +31,7 @@ public class AsalSayiHesaplamaOpt02 {
 				}
 			}
 		}
-
+		
 		// Asal sayı ve zaman çıktısını alan bölüm.
 		if (isPrime) {
 			System.out.println("Girdiginiz sayi asaldir!");
