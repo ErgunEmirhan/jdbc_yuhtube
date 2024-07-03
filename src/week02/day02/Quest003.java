@@ -1,7 +1,7 @@
 package week02.day02;
 
 import java.util.Scanner;
-
+//!Hatali çalışıyor
 public class Quest003 {
 	public static void main(String[] args) {
 		int number, sum = 1, counter=0;

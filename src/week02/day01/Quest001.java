@@ -1,5 +1,5 @@
 package week02.day01;
-
+//! Hatali kod
 public class Quest001 {
 	public static void main(String[] args) {
 		double price = 100;
