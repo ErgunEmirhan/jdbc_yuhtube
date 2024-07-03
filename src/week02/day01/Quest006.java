@@ -8,8 +8,8 @@ public class Quest006 {
 		Scanner sc = new Scanner(System.in);
 		int r = sc.nextInt();
 		
-		int alan = (int)(Math.PI * r*r);
-		int cevre = (int)(Math.PI*2*r);
-		System.out.println("Alan: " + alan + " Çevre: " + cevre);
+		int calculatedArea = (int)(Math.PI * r*r);
+		int circumference = (int)(Math.PI*2*r);
+		System.out.println("Alan: " + calculatedArea + " Çevre: " + circumference);
 	}
 }
