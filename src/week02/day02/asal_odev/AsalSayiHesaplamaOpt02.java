@@ -4,24 +4,26 @@ import java.util.Scanner;
 
 public class AsalSayiHesaplamaOpt02 {
 	public static void main(String[] args) {
-		long timerStart = System.currentTimeMillis(); // Zaman tanımlayıcı
-		
+	 //! 2, 3, 5, 7 sayilarini bulamiyor
+//		MAX VALUE : 2147483647, 555555571159, 1000000016531
 		//Değişken ve Nesne tanımlama
 		Scanner sc = new Scanner(System.in);
-		int num;
+		long num;
 		boolean isPrime = false;
+		long timerStart = 0, timerEnd = 0, timer;
 		
 		// Kullanıcıdan girdi alma.
 		System.out.print("Bir sayi giriniz: ");
-		num = sc.nextInt();
+		num = sc.nextLong();
 		
 		// Asal sayıyı bulma işlemini yapan bölüm.
 		if (num == 2) {
 			isPrime = true;
 		}
 		else if (num % 2 != 0) {
-			double root = Math.sqrt(num);
-			for (int i = 3; i < root; i += 2) {
+			timerStart = System.nanoTime(); // Zaman tanımlayıcı
+			long root = (long) Math.sqrt(num);
+			for (long i = 3; i <= root; i += 2) {
 				if (num % i == 0) {
 					isPrime = false;
 					break;
@@ -30,6 +32,7 @@ public class AsalSayiHesaplamaOpt02 {
 					isPrime = true;
 				}
 			}
+			timerEnd = System.nanoTime();
 		}
 		
 		// Asal sayı ve zaman çıktısını alan bölüm.
@@ -40,8 +43,7 @@ public class AsalSayiHesaplamaOpt02 {
 			System.out.println("Girdiginiz sayi asal degildir!");
 		}
 		
-		long timerEnd = System.currentTimeMillis();
-		long timer = timerEnd - timerStart;
+		timer = (timerEnd - timerStart) /1000000;
 		System.out.println("Geçen süre: " + timer);
 	}
 	
