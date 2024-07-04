@@ -1,5 +1,5 @@
 package week02.day03.assignment;
-
+/*Dil menüsüne geri dönebilme ve dil menüsünde de çıkış özelliği ekle*/
 import java.util.Scanner;
 
 public class UserMenu_TR_EN {
@@ -144,7 +144,7 @@ public class UserMenu_TR_EN {
 					}
 				}
 			}else {
-				System.out.println("Something went wrong! Please try again.");
+				System.out.println("Something went wrong! Please try again. / Bir sorun olustu!");
 			}
 		}
 		
