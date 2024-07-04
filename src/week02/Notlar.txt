@@ -91,3 +91,14 @@ Yapılması istenilen işlemin istenilen koşul sağlanana kadar tekrarlanmasın
 
 - **For**, **while**, ve **do-while** aynı mantıkta çalışır, aralarında ufak kullanım farkları vardır.
 - **Do-while** komutu kod bloğu çalıştıktan sonra koşul sağlanıyor mu diye kontrol yapar.
+
+Çıtır Ekstra Bilgiler
+
+for (char begin = 'a'; begin <= 'z'; begin++){...} şeklinde de char tipindeki veri tipleri ile işlem yapılabilir. Çünkü ASCII sayısal değerlerini de taşımaktadır.
+
+String methodları kullanılarak bir çok işlem kolaylıkla gerçekleştirilebilir.
+-trim(); -> whiteSpaceleri siler;
+-charAt(); -> girilen verinin i'inci kelimesini getirir.
+-length(); -> verinin kelime uzunluğunu int veri tipi olarak döndürür.
+-indexOf(); -> girilen harfin ilk indexini verir
+-substring(); -> girilen indexler aralığındaki kelime/harfleri yazdırır. Boşluk da dahil. ilk index dahildir son index dahil değildir.
