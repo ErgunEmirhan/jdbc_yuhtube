@@ -1,80 +1,93 @@
-Java Nedir?
-Mimari olarak bağımsız bir programlama dili: Herhangi bir donanım ve işletim sistemine bağımlı değildir. JVM olan her cihaz üzerinde çalışır.
-Bağımsız ve yorumlanan özellikleri: Java'yı taşınabilir kılar.
-Derlenen ve yorumlanan dil: Java hem derlenir hem yorumlanır.
-Java'nın Bileşenleri:
-JVM (Java Virtual Machine): Sanal bir makinedir. Derlenmiş bytecode'ları çalıştırır.
-JRE (Java Runtime Environment): Java programlarının yürütülebilmesi için Java Class Library'ni ve yazılım araçlarını içerir.
-JDK (Java Development Kit): Java programları ve uygulamaları oluşturmak için kullanılan paket.
-Java İfade Tipleri
-Declaration: int sayac; Sadece değişken tipi ve ismi tanımlama.
-Initialization: sayac = 10; Öncesinde tanımlanan değişkene sonrasında değer atama işlemi.
-Definition: int sayac2 = 10; Değişken tipi ve ismini tanımlarken aynı anda değer atama işlemi.
-Var: Değişken tipinin ne olacağı tahmin edilemeyen durumlarda kullanılan tip çıkarım özelliği taşıyan değişken tipidir. Değişken tipi belirlendikten sonra aynı değişkene farklı tipte değişken atanamaz!
-Değişken İsimlendirme Kuralları
-Değişken isimleri harf ve küçük harf ile başlamalıdır. $ ve _ gibi istisna semboller ile başlayabilirler. Değişken isimlerinde boşluk olmamalıdır.
-Sabit değişken isimleri tamamen büyük harf ile yazılmalıdır ve final anahtar kelimesi ile tanımlanırlar.
-Java'da Package ve Class Oluşturma Kuralları
-Package: Java package yolu package anahtarı ile kaynak kodunun başında tanımlanır. En üst satırda yer almalıdır ve onun üzerinde yorum satırı dışında başka bir kod bulunmamalıdır.
-Class: Class isimleri .java uzantısı ile aynı olmalıdır ve büyük harf ile başlamalıdır.
-Not: Yazılım dillerinde Türkçe karakterler kullanılmaz. Sadece kullanıcıya çıktı verilecek yerler Türkçe karakterler taşıyabilir.
+## Java Nedir?
 
-Java Veri Tipleri
-Primitive Types
+- **Mimari olarak bağımsız bir programlama dili:** Herhangi bir donanım ve işletim sistemine bağımlı değildir. JVM olan her cihaz üzerinde çalışır.
+- **Bağımsız ve yorumlanan özellikleri:** Java'yı taşınabilir kılar.
+- **Derlenen ve yorumlanan dil:** Java hem derlenir hem yorumlanır.
+
+### Java'nın Bileşenleri:
+
+- **JVM (Java Virtual Machine):** Sanal bir makinedir. Derlenmiş bytecode'ları çalıştırır.
+- **JRE (Java Runtime Environment):** Java programlarının yürütülebilmesi için Java Class Library'ni ve yazılım araçlarını içerir.
+- **JDK (Java Development Kit):** Java programları ve uygulamaları oluşturmak için kullanılan paket.
+
+## Java İfade Tipleri
+
+- **Declaration:** `int sayac;` Sadece değişken tipi ve ismi tanımlama.
+- **Initialization:** `sayac = 10;` Öncesinde tanımlanan değişkene sonrasında değer atama işlemi.
+- **Definition:** `int sayac2 = 10;` Değişken tipi ve ismini tanımlarken aynı anda değer atama işlemi.
+- **Var:** Değişken tipinin ne olacağı tahmin edilemeyen durumlarda kullanılan tip çıkarım özelliği taşıyan değişken tipidir. Değişken tipi belirlendikten sonra aynı değişkene farklı tipte değişken atanamaz!
+
+### Değişken İsimlendirme Kuralları
+
+- Değişken isimleri harf ve küçük harf ile başlamalıdır. `$` ve `_` gibi istisna semboller ile başlayabilirler. Değişken isimlerinde boşluk olmamalıdır.
+- Sabit değişken isimleri tamamen büyük harf ile yazılmalıdır ve `final` anahtar kelimesi ile tanımlanırlar.
+
+## Java'da Package ve Class Oluşturma Kuralları
+
+- **Package:** Java package yolu `package` anahtarı ile kaynak kodunun başında tanımlanır. En üst satırda yer almalıdır ve onun üzerinde yorum satırı dışında başka bir kod bulunmamalıdır.
+- **Class:** Class isimleri `.java` uzantısı ile aynı olmalıdır ve büyük harf ile başlamalıdır.
+
+**Not:** Yazılım dillerinde Türkçe karakterler kullanılmaz. Sadece kullanıcıya çıktı verilecek yerler Türkçe karakterler taşıyabilir.
+
+## Java Veri Tipleri
+
+### Primitive Types
+
 Dilin tasarımı sırasında detayları değişmeyecek şekilde belirlenmiş veri tipleridir:
+- **Tamsayılar:** `byte`, `short`, `int`, `long`
+- **Ondalıklı Sayılar:** `float`, `double`
+- **Karakter:** `char` (aynı zamanda karaktere karşılık gelen ASCII değerini de taşır)
+- **Mantıksal:** `boolean` (true/false)
 
-Tamsayılar: byte, short, int, long
-Ondalıklı Sayılar: float, double
-Karakter: char (aynı zamanda karaktere karşılık gelen ASCII değerini de taşır)
-Mantıksal: boolean (true/false)
-Complex Types
-Bunların detaylarını daha sonra göreceğiz. İçerisinde String, Enum gibi veri türleri vardır.
+### Complex Types
 
-Cast İşlemi
-Primitive type'lar arasında cast anahtarı kullanarak büyük hacimli veri türlerini küçük hacimli veri türlerine değiştirebiliriz. Örnek: int (64 bit) to short (32 bit).
-Eğer bir veri tipi daha büyük veri hacimli bir veriye çevrilecekse bu işlem otomatik gerçekleştirilir.
-Tam sayılardan ondalıklı sayılara veri dönüşümü otomatik gerçekleştirilir fakat bunun tam tersi bir işlemde veri kaybı oluşacağı için cast anahtarı kullanılmalıdır.
-Boolean veri tipi cast edilemez.
-Not: String veri tipini parseInt gibi bir metod ile çevirebiliriz çünkü complex veri tipidir.
-Not: byte/short <-> char arasında cast işlemi yapılamaz çünkü byte ve short işaretli fakat char işaretsizdir (-/+).
-Kullanıcıdan Veri Alma İşlemi
-Scanner sınıfı ile bu işlem gerçekleştirilir. Kullanılacak veri türüne göre de metod seçimi yapılmalıdır. Eğer sayısal bir veri girişi aldıysak ve sonrasında String bir değer alacaksak nextLine() metodu yutulacağı için iki farklı veri alma işleminin arasına bir kere bu metod çağrılır.
+Bunların detaylarını daha sonra göreceğiz. İçerisinde `String`, `Enum` gibi veri türleri vardır.
 
-Final (Constant)
+## Cast İşlemi
+
+- Primitive type'lar arasında `cast` anahtarı kullanarak büyük hacimli veri türlerini küçük hacimli veri türlerine değiştirebiliriz. Örnek: `int` (64 bit) to `short` (32 bit).
+- Eğer bir veri tipi daha büyük veri hacimli bir veriye çevrilecekse bu işlem otomatik gerçekleştirilir.
+- Tam sayılardan ondalıklı sayılara veri dönüşümü otomatik gerçekleştirilir fakat bunun tam tersi bir işlemde veri kaybı oluşacağı için `cast` anahtarı kullanılmalıdır.
+- **Boolean veri tipi cast edilemez.**
+- **Not:** String veri tipini `parseInt` gibi bir metod ile çevirebiliriz çünkü complex veri tipidir.
+- **Not:** `byte/short <-> char` arasında cast işlemi yapılamaz çünkü `byte` ve `short` işaretli fakat `char` işaretsizdir (-/+).
+
+## Kullanıcıdan Veri Alma İşlemi
+
+`Scanner` sınıfı ile bu işlem gerçekleştirilir. Kullanılacak veri türüne göre de metod seçimi yapılmalıdır. Eğer sayısal bir veri girişi aldıysak ve sonrasında String bir değer alacaksak `nextLine()` metodu yutulacağı için iki farklı veri alma işleminin arasına bir kere bu metod çağrılır.
+
+## Final (Constant)
+
 Bir kere atandıktan sonra bir daha değiştirilmemesi gereken veri tipleridir. Örnek: Pi'nin değeri.
 
-Operatörler
-Atama Operatörü: =, +=, /= Örnek: i = 5; veya i -= sayi;
-İkili Aritmatik Operatörler: +, -, *, /, %
-Tekli Aritmatik İşlemciler: +, -, ++, --
-Pre-increment: ++a
-Post-decrement: a--
-Tekli Mantıksal Operatör (!): False değeri true; true değeri false yapar.
-Kıyaslama Operatörleri: <, >, <=, >=, ==, !=
-Şart Operatörleri: &&, ||
-Ternary Operator: (koşul) ? true:false
-Karar Yapıları (if-else)
-if (koşul) {…}: Kaynak kodunda istenilen koşul doğrultusunda o koşulun sağlanması halinde sadece o koşula ait scope kısmındaki kodlar çalışır.
-if-else: Birden fazla koşul sorgulaması yapılabilir.
-else: Hiçbir koşulun sağlanmaması sonucunda çalışacak koddur.
-Switch-Case
-if-else kadar esnek değildir. Birden fazla koşula aynı anda bakabilmek yerine, koşulun sonucunda dönen değer hangi case'e denk geliyorsa o case bloğundaki kodlar çalışır. Örnek: Switch koşulu sonucunda 4 değerini aldıysak case 4: // kod; break; çalışacaktır.
-default: Hiçbir koşul sağlanmıyorsa çalışır.
-Not: if-else == mantıksal operatörü String veri tipleri için kullanılamaz. Aynı veri kıyası yapılamaz çünkü stack ve heap işlemleri olduğu için, bunun yerine iki ayrı String değişkenini .equals() metodu ile kıyaslayabiliriz.
+## Operatörler
 
-Döngüler
+- **Atama Operatörü:** `=`, `+=`, `/=` Örnek: `i = 5;` veya `i -= sayi;`
+- **İkili Aritmatik Operatörler:** `+`, `-`, `*`, `/`, `%`
+- **Tekli Aritmatik İşlemciler:** `+`, `-`, `++`, `--` 
+  - Pre-increment: `++a`
+  - Post-decrement: `a--`
+- **Tekli Mantıksal Operatör (!):** False değeri true; true değeri false yapar.
+- **Kıyaslama Operatörleri:** `<`, `>`, `<=`, `>=`, `==`, `!=`
+- **Şart Operatörleri:** `&&`, `||`
+- **Ternary Operator:** `(koşul) ? true:false`
+
+## Karar Yapıları (if-else)
+
+- **if (koşul) {…}**: Kaynak kodunda istenilen koşul doğrultusunda o koşulun sağlanması halinde sadece o koşula ait scope kısmındaki kodlar çalışır.
+- **if-else**: Birden fazla koşul sorgulaması yapılabilir.
+- **else**: Hiçbir koşulun sağlanmaması sonucunda çalışacak koddur.
+
+### Switch-Case
+
+- if-else kadar esnek değildir. Birden fazla koşula aynı anda bakabilmek yerine, koşulun sonucunda dönen değer hangi case'e denk geliyorsa o case bloğundaki kodlar çalışır. Örnek: Switch koşulu sonucunda `4` değerini aldıysak `case 4: // kod; break;` çalışacaktır.
+- **default:** Hiçbir koşul sağlanmıyorsa çalışır.
+
+**Not:** if-else `==` mantıksal operatörü String veri tipleri için kullanılamaz. Aynı veri kıyası yapılamaz çünkü stack ve heap işlemleri olduğu için, bunun yerine iki ayrı String değişkenini `.equals()` metodu ile kıyaslayabiliriz.
+
+## Döngüler
+
 Yapılması istenilen işlemin istenilen koşul sağlanana kadar tekrarlanmasını sağlayan kodlardır.
 
-For, while, ve do-while aynı mantıkta çalışır, aralarında ufak kullanım farkları vardır.
-Do-while komutu kod bloğu çalıştıktan sonra koşul sağlanıyor mu diye kontrol yapar.
-
-Çıtır Ekstra Bilgiler
-
-for (char begin = 'a'; begin <= 'z'; begin++){...} şeklinde de char tipindeki veri tipleri ile işlem yapılabilir. Çünkü ASCII sayısal değerlerini de taşımaktadır.
-
-String methodları kullanılarak bir çok işlem kolaylıkla gerçekleştirilebilir.
--trim(); -> whiteSpaceleri siler;
--charAt(); -> girilen verinin i'inci kelimesini getirir.
--length(); -> verinin kelime uzunluğunu int veri tipi olarak döndürür.
--indexOf(); -> girilen harfin ilk indexini verir
--substring(); -> girilen indexler aralığındaki kelime/harfleri yazdırır. Boşluk da dahil. ilk index dahildir son index dahil değildir.
+- **For**, **while**, ve **do-while** aynı mantıkta çalışır, aralarında ufak kullanım farkları vardır.
+- **Do-while** komutu kod bloğu çalıştıktan sonra koşul sağlanıyor mu diye kontrol yapar.
