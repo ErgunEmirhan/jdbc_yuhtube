@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Quest03 {
 	public static void main(String[] args) {
 		String mainValue = "Java,React,Spring", output;
-		int mainValueLength = mainValue.length(), startIndex = 0, counter = 0;
+		int mainValueLength = mainValue.length(), startIndex = 0;
 		for (int i = 0; i < mainValueLength; i++) {
 			if (mainValue.charAt(i) == ',') {
 				output = mainValue.substring(startIndex, i);
-				startIndex = i + 1;
+				startIndex = i +1;
 				System.out.println(output);
 			}
 		}
