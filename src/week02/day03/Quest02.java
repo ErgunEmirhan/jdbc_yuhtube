@@ -4,15 +4,6 @@ import java.util.Scanner;
 
 /*
 * 2- Dışarıdan ay ve gün değerini ayrı ayrı bir sayı olarak alacaksınız buna göre bur. hesabı yapan program
-
-
-
-
-
-
-
-
-
 */
 public class Quest02 {
 	public static void main(String[] args) {

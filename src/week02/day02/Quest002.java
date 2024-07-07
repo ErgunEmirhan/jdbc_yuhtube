@@ -1,4 +1,5 @@
 package week02.day02;
+//2- a'dan z'ye alfabeyi yazdıralım.
 
 public class Quest002 {
 	public static void main(String[] args) {

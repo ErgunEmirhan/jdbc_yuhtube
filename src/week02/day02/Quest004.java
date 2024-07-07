@@ -1,4 +1,5 @@
 package week02.day02;
+//4- Kulanıcının girdiği sayının çarpım tablosunu yazdıran program. (Kullanıcı 7 girdiğinde 7'nin çarpım tablosu elemanları görünecek. )
 
 import java.util.Scanner;
 

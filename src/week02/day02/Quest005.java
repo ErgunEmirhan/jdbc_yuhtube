@@ -1,4 +1,5 @@
 package week02.day02;
+//5- 1'den 100'e kadar olan çift sayıların toplamının, tek sayıların toplamına olan oranını bulan program.
 
 public class Quest005 {
 	public static void main(String[] args) {

@@ -10,7 +10,7 @@ public class AsalSayiHesaplama {
 		//Değişken ve Nesne tanımlama
 		Scanner sc = new Scanner(System.in);
 		long num;
-		boolean isPrime = false;
+		boolean isPrime = true;
 		long timerStart = 0, timerEnd = 0, timer;
 		
 		// Kullanıcıdan girdi alma.

@@ -10,7 +10,7 @@ public class AsalSayiHesaplamaOpt01 {
 		//Değişken ve Nesne tanımlama
 		Scanner sc = new Scanner(System.in);
 		long num;
-		boolean isPrime = false;
+		boolean isPrime = true;
 		long timerStart = 0, timerEnd = 0, timer;
 		
 		// Kullanıcıdan girdi alma.
@@ -18,14 +18,11 @@ public class AsalSayiHesaplamaOpt01 {
 		num = sc.nextLong();
 		
 		// Asal sayıyı bulma işlemini yapan bölüm.
-		if (num < 2){
-			isPrime = false;
-		}
 		if (num == 2) {
 			isPrime = true;
 		}
 		else if (num % 2 == 0){
-			isPrime= false;
+			isPrime= true;
 		}
 		else {
 			timerStart = System.nanoTime();
