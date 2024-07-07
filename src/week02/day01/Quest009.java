@@ -1,17 +1,17 @@
 package week02.day01;
-
-import java.util.Scanner;
+//9- 1 den başlayarak gelen bütün sayıları toplayalım. Toplamımız 50'yi geçene kadar çalışsın. en son toplamı yazdıralım ve bu döngünün kaç kere çalıştığını yazdıralım.
 
 public class Quest009 {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int sum = 0;
-		System.out.println("Bir sayi giriniz: ");
-		int num = sc.nextInt();
-		
-		for (int i = 1; i <= num; i++){
-			sum = sum +(i+1);
+		int counter =1, sum = 0;
+		while(sum <= 50){
+			sum += counter;
+			
+			if(sum > 50){
+				break;
+			}
+			counter++;
 		}
-		System.out.println(sum);
+		System.out.println("Toplam: " + sum + " counter: " + counter);
 	}
 }

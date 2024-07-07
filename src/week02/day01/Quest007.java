@@ -1,20 +1,18 @@
 package week02.day01;
+//7- Dışarıdan girilen bir sayının faktoriyelini alalım.
 
 import java.util.Scanner;
 
 public class Quest007 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Birinci sayiyi giriniz: ");
-		int num1 = sc.nextInt();
-		System.out.println("İkinci sayiyi giriniz: ");
-		int num2 = sc.nextInt();
+		int fakt = 1;
+		System.out.print("Bir sayi giriniz: ");
+		int num = sc.nextInt();
 		
-		int sum = num1+num2;
-		
-		boolean isEven = sum % 2 == 0;
-		System.out.println(isEven ? "Çift":"Tek");
-		
-		System.out.println("Girdiğiniz sayilarin ortalamasi: " + (num1+num2)/2);
+		for (int i = 1; i <= num; i++){
+			fakt *= i;
+		}
+		System.out.println(fakt);
 	}
 }
