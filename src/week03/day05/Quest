@@ -1,0 +1,60 @@
+Çoklu menü tasarımı(tr-en):
+
+kullanıcı önce dil seçimi yapcak
+
+Lutfen goruntuleme dilini seciniz. / Please select display language.
+1-Turkce
+2-English
+3-Exit/Cikis
+Kullanıcının yaptığı seçime göre package içerisinde bulunan tr ya en pakage klasörün içerisine yönlendirilerek çoklu menü gelecek:
+
+1-Calculator
+2-Scientific Calculator (pow/sqrt)
+3- '*' ile üçgen çizme
+0-Exit
+
+bu işlemlerin(Seçeneklerin) hepsi ayrı bir pakage içerisinde düzenlenicek.
+
+Seçenek 1: Calculator Menüsü
+1-Toplama
+2-Çıkarma
+3-Bölme
+4-Çarpma
+5-Exit
+
+Seçenek 2: Scientific Calculator
+1-üs alma (kullanıcıdan bir taban bir üs değeri al ve üs işlemi yaptır.)
+2-karekök alma (kullanıcıdan bir girdi al karekök dön)
+6-Exit
+
+Seçenek 3: '*' ile üçgen çizme (Boyutları kullanıcı girecek)
+1- dik üçgen
+2- ters dik üçgen
+3-eşkenar üçgen
+4-Ters eşkenar üçgen
+
+
+Üçgen örnekleri: boyut 3 ise
+1-
+*
+**
+***
+2-
+***
+**
+*
+3-
+  *
+ ***
+*****
+4-
+*****
+ ***
+  *
+
+Bu menülerin kendi paketleri olacak ve her seçenek bir sınıfın içerisinde method olarak yazılacak. Bu program ise Runner adlı sınıf içerisinden çalıştırılcak
+
+ör
+.menu -> .tr -> .calculator paketinin içerisinde Toplama(), Cıkarma(), ... Sınıfları bulunacak. (İsteğe bağlı olarak ayrı ya da tek bir sınıf içerisinde olabilir).
+
+.menu içerisinde Runner() sınıfı ve Menu() sınıfı olacak. Runner içerisinden Menu çağrılacak Menu içerisinde ise dil seçimi menusu olacak.
