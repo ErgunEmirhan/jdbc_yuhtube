@@ -1,5 +1,7 @@
 package week03.day02;
 
+import java.util.Arrays;
+
 /*
 8- String'i parçalara ayıralım, bir array'e kaydedelim. Sonra aşağıdaki örnek çıktıyı almaya çalışalım;
 
@@ -14,7 +16,6 @@ public class Quest008 {
 		String rawString =
 				"01-Adana;02-Adıyaman;03-Afyonkarahisar;04-Ağrı;05-Amasya;06-Ankara;07-Antalya;08-Artvin;09-Aydın;" +
 						"10-Balıkesir;42-Konya";
-		int LengthOfString = rawString.length();
 		int startIndex = 0, inputCounter = 0;
 		String[] inputs = new String[11];
 		for (int i = 0; i < rawString.length(); i++) {
@@ -27,5 +28,11 @@ public class Quest008 {
 		}
 		inputs[inputCounter] = rawString.substring(startIndex);
 		System.out.println(inputs[inputCounter]);
+		
+		example2(rawString);
+	}
+	static void example2(String rawString){
+		String[]cityArr = rawString.split(";");
+		System.out.println(Arrays.toString(cityArr));
 	}
 }

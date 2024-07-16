@@ -1,5 +1,6 @@
 package week03.day05.menu_with_methods;
 
+import week03.day05.menu_with_methods.english.EngMenu;
 import week03.day05.menu_with_methods.turkce.TurkceMenu;
 
 import java.util.InputMismatchException;
@@ -36,6 +37,8 @@ public class Menu {
 					break;
 				}
 				case 2: {
+					EngMenu eng = new EngMenu();
+					eng.engMenuOptions();
 					break;
 				}
 				case 0: {
