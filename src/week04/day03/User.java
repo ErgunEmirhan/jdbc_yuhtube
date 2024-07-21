@@ -61,6 +61,22 @@ public class User {
 		return password;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public String getSurName() {
+		return surName;
+	}
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	public LocalDate getBirthDay() {
+		return birthDay;
+	}
+	
 	//Setters
 	public void setBirthDay(LocalDate birthDay) {
 		this.birthDay = birthDay;

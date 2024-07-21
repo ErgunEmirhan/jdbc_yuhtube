@@ -39,7 +39,6 @@ public class Main {
 		
 		
 	}
-	
 	private static void userSelection(int userInput) {
 		switch (userInput) {
 			case 1: {
@@ -47,8 +46,10 @@ public class Main {
 				break;
 			}
 			case 2: {
-				userLogin();
-//				loginMenu();
+				int userIndex = userLogin();
+				if (userIndex != -1){
+					loginMenu(userIndex); // kullanıcı başarılı bir şekilde giriş yaparsa bu menü çıkacak
+				}
 				break;
 			}
 			case 3:{
@@ -67,14 +68,42 @@ public class Main {
 				System.out.println("Please enter a valid value!");
 		}
 	}
+	private static void loginMenu(int userIndex) {
+		int userInput = -1;
+		do {
+			System.out.println("1.profile");
+			System.out.println("0-logout");
+			System.out.print("selection: ");
+			try {
+				userInput = sc.nextInt();
+			}
+			catch (InputMismatchException e) {
+				System.out.println("\nPlease enter a numeric value!");
+				continue;
+			}
+			finally {
+				sc.nextLine();
+			}
+			userSelectionForLogin(userInput, userIndex);
+			
+		}while (userInput != 0);
+		
+	}
+	private static void userSelectionForLogin(int userInput, int userIndex) {
+		switch (userInput) {
+			case 1: { // profile
+				UserDB.listUser(userIndex);
+				break;
+			}
+			case 0 : {
+				System.out.println("Please have nice day!");
+				break;
+			}
+			default:
+				System.out.println("Please enter a valid value!");
+		}
+	}
 	
-//	private static void loginMenu() {
-//		do {
-//			System.out.println("1.profile");
-//			System.out.println("0-logout");
-//		}
-//
-//	}
 	
 	private static void userRegister() {
 		LocalDate birthDay;
@@ -96,7 +125,7 @@ public class Main {
 		user.setTcNo(getUserTcNo(true));
 		UserDB.save(user);
 	}
-	private static void userLogin() {
+	private static int userLogin() {
 		String username;
 		String password;
 		int userIndex;
@@ -106,12 +135,13 @@ public class Main {
 			System.out.print("Please enter your password: ");
 			password = sc.nextLine();
 			if (UserDB.isRightUser(password, userIndex)){
-				System.out.println("Başarıyla giriş yapıldı!");
-				return;
+				System.out.println("Successfully logged in!");
+				return userIndex;
 			}
-			System.out.println((i+1) +". hatalı giriş! sifre Yanlış");
+			System.out.println((i+1) +". wrong password!");
 		}
-		System.out.println("3  tane hakkınızda doldu! Giriş yapılamıyor!");
+		System.out.println("You've had 3 attempts! Unable to log in!");
+		return -1;
 	}
 	private static void changeForgottenPassword() {
 		int userIndex;
@@ -247,7 +277,6 @@ public class Main {
 		}while (!isMailCorrect);
 		return null;
 	}
-	//TODO: hotmail.com, ve diğer adresleri kontrol etsin.
 	private static boolean checkMailAddress(String mail) {
 		if (!mail.contains("@")){
 			System.out.println("Please enter a valid email address!");

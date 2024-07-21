@@ -100,4 +100,16 @@ class UserDB {
 		}
 		
 	}
+	
+	public static void listUser(int userIndex) {
+		User[] userArray = userList.getUserArray();
+		System.out.println("###### User Information ######");
+		System.out.println("Full name: "+ userArray[userIndex].getName() + " " + userArray[userIndex].getSurName());
+		System.out.println("Email address: "+ userArray[userIndex].getMail());
+		System.out.println("Username: "+ userArray[userIndex].getUserName());
+		System.out.println("Mobile: "+ userArray[userIndex].getPhoneNumber());
+		System.out.println("Birth day: "+ userArray[userIndex].getBirthDay());
+		System.out.println("Signed up date: "+ userArray[userIndex].getSignUpDate());
+		
+	}
 }
