@@ -6,19 +6,26 @@ class UserDB {
 	static User save(User user){
 		return userList.add(user);
 	}
+	public static User update(User user) {
+		int index = 0;
+		for (User arrUser : userList.getUserArray()){
+			if (user.getId() == arrUser.getId()){
+				return userList.replace(index,user);
+			}
+			index++;
+		}
+		return null;
+	}
+	
 	static User[] findAll(){
 		User[] userArray = userList.getUserArray();
-		if (userArray == null){
-			System.out.println("There is no user! Array is null");
-			return null;
-		}
 		for(User user : userArray){
 			System.out.println(user);
 		}
 		return userArray;
 	}
-	static boolean findEmail(String mail){
-		User[] userArray = userList.getUserArray();
+	static boolean existByEmail(String mail){
+		/*User[] userArray = userList.getUserArray();
 		if (userArray == null){
 			return false;
 		}
@@ -27,11 +34,17 @@ class UserDB {
 				return true;
 			}
 		}
+		return false;*/ //Benim Çözüm
+		for(User user : userList.getUserArray()){
+			if (user.getMail().equals(mail)){
+				return true;
+			}
+		}
 		return false;
 	}
 	
-	public static boolean findTcNo(String tcno) {
-		User[] userArray = userList.getUserArray();
+	public static boolean existByTc(String tcno) {
+		/*User[] userArray = userList.getUserArray();
 		if (userArray == null){
 			return false;
 		}
@@ -40,8 +53,25 @@ class UserDB {
 				return true;
 			}
 		}
+		return false;*/ // benim çözüm
+		for(User user : userList.getUserArray()){
+			if (user.getTC().equals(tcno)){
+				return true;
+			}
+		}
 		return false;
 	}
+	
+	static User findByUsernameAndPassword(String username, String password){
+		for (User user : userList.getUserArray()){
+			if (user.getUserName().equals(username)&& user.getPassword().equals(password)){
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	
 	public static int findTcNoIndex(String tcno) {
 		User[] userArray = userList.getUserArray();
 		if (userArray == null){
@@ -54,7 +84,7 @@ class UserDB {
 		}
 		return -1;
 	}
-	public static int findUsernameIndex(String username) {
+	/*public static int findUsernameIndex(String username) {
 		User[] userArray = userList.getUserArray();
 		if (userArray == null){
 			return -1;
@@ -79,13 +109,19 @@ class UserDB {
 			return true;
 		}
 		return false;
-	}
-	public static boolean findUserName(String username) {
-		User[] userArray = userList.getUserArray();
+	}*/ // benim çözüm
+	public static boolean existByUserName(String username) {
+		/*User[] userArray = userList.getUserArray();
 		if (userArray == null){
 			return false;
 		}
 		for(User user : userArray){
+			if (user.getUserName().equals(username)){
+				return true;
+			}
+		}
+		return false;*/ // Benim çözüm
+		for(User user : userList.getUserArray()){
 			if (user.getUserName().equals(username)){
 				return true;
 			}
@@ -101,15 +137,24 @@ class UserDB {
 		
 	}
 	
-	public static void listUser(int userIndex) {
+	public static User findById(int id) {
 		User[] userArray = userList.getUserArray();
-		System.out.println("###### User Information ######");
-		System.out.println("Full name: "+ userArray[userIndex].getName() + " " + userArray[userIndex].getSurName());
-		System.out.println("Email address: "+ userArray[userIndex].getMail());
-		System.out.println("Username: "+ userArray[userIndex].getUserName());
-		System.out.println("Mobile: "+ userArray[userIndex].getPhoneNumber());
-		System.out.println("Birth day: "+ userArray[userIndex].getBirthDay());
-		System.out.println("Signed up date: "+ userArray[userIndex].getSignUpDate());
+		for (User user : userArray){
+			if (user.getId() == id){
+				return  user;
+			}
+		}
+		return null;
 		
+	}
+	
+	
+	public static User findByTcEmail(String tc, String mail) {
+		for (User user: userList.getUserArray()){
+			if (user.getTC().equals(tc) && user.getMail().equals(mail)){
+				return user;
+			}
+		}
+		return null;
 	}
 }

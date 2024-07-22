@@ -5,27 +5,26 @@ public class UserList {
 	private User[] userArray;
 	private int arrSize;
 	
+	UserList() {
+		userArray = new User[0];
+	}
+	
 	public User[] getUserArray() {
 		return userArray;
 	}
 	
 	public User add(User user){
-		if (this.arrSize == 0){
-			userArray = new User[1];
-			userArray[0] = user;
-			this.arrSize = 1;
+		User[] copy = new User[this.arrSize + 1];
+		for (int i = 0; i < arrSize; i++) {
+			copy[i] = userArray[i];
 		}
-		else {
-			User[] copy = new User[this.arrSize +1];
-			for (int i = 0; i< arrSize; i++){
-				copy[i] = userArray[i];
-			}
-			copy[this.arrSize] = user;
-			userArray = copy;
-			this.arrSize++;
-		}
-		System.out.println("Successfully you are signed up!");
-		return userArray[arrSize-1];
+		copy[this.arrSize] = user;
+		userArray = copy;
+		this.arrSize++;
+		return userArray[arrSize - 1];
+	}
+	public User replace(int index, User user) {
+		return userArray[index] = user;
 	}
 	/*
 	*1.2 - OzelListe sınıfında remove isimli bir metot yazalim. Bu metot kullanıcının dışarıdan parametre olarak
@@ -90,4 +89,6 @@ public class UserList {
 			this.userArray = copy;
 		}
 	}
+	
+	
 }

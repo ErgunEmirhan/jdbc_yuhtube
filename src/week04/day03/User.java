@@ -41,7 +41,7 @@ public class User {
 	}
 	
 	//Getters
-	public int getUserId() {
+	public int getId() {
 		return userId;
 	}
 	public LocalDate getSignUpDate() {
@@ -113,6 +113,6 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User{" + "birthDay=" + birthDay + ", userId=" + getUserId() + ", name='" + name + '\'' + ", surName='" + surName + '\'' + ", mail='" + mail + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", password='" + password + '\'' + ", userName='" + userName + '\'' + ", tcNo='" + tcNo + '\'' + ", signUpDate=" + getSignUpDate() + '}';
+		return "User{" + "birthDay=" + birthDay + ", userId=" + getId() + ", name='" + name + '\'' + ", surName='" + surName + '\'' + ", mail='" + mail + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", password='" + password + '\'' + ", userName='" + userName + '\'' + ", tcNo='" + tcNo + '\'' + ", signUpDate=" + getSignUpDate() + '}';
 	}
 }
