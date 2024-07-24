@@ -1,6 +1,4 @@
-package week04.day03;
-
-import java.time.LocalDate;
+package kullanici_kayit_sistemi.refactored;
 
 public class SMS extends Massage{
 	private static int smsIndex = 0;

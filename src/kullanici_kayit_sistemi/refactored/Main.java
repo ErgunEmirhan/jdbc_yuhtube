@@ -1,4 +1,4 @@
-package week04.day03;
+package kullanici_kayit_sistemi.refactored;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
 		menu();
 	}
-	
+
 	// kullanıcı giriş/ kayıt menusu
 	public static void menu() {
 		int userInput = -1;
@@ -35,12 +35,12 @@ public class Main {
 				sc.nextLine();
 			}
 			menuFunctions(userInput);
-			
+
 		} while (userInput != 0);
-		
-		
+
+
 	}
-	
+
 	private static void menuFunctions(int userInput) {
 		switch (userInput) {
 			case 1: {
@@ -74,9 +74,9 @@ public class Main {
 				System.out.println("Please enter a valid value!");
 		}
 	}
-	
 
-	
+
+
 	// > --- Case 1 : Start --- <
 	private static User userRegister() {
 		LocalDate birthDay;
@@ -99,7 +99,7 @@ public class Main {
 		UserDB.save(user);
 		return user;
 	}
-	
+
 	private static LocalDate askBirthDate() {
 		while (true) {
 			System.out.print("Please enter your birth day (yyyy-MM-dd): ");
@@ -118,7 +118,7 @@ public class Main {
 		boolean isLegal = (age < 18) ? false : true;
 		return isLegal;
 	}
-	
+
 	private static String[] askFullName() {
 		String[] fullName = new String[2];
 		System.out.print("Please enter your name: ");
@@ -127,25 +127,8 @@ public class Main {
 		fullName[1] = sc.nextLine();
 		return fullName;
 	}
-	
+
 	private static String askMail() {
-		/*boolean isMailCorrect = false;
-		do {
-			System.out.print("Please enter your e-mail address: ");
-			String mail = sc.nextLine();
-			isMailCorrect = checkMailAddress(mail);
-			boolean isMailContains = UserDB.findEmail(mail);
-			if (isMailCorrect && !isMailContains){
-				return mail;
-			}
-			if (isMailContains){
-				System.out.println("Please try another mail address!");
-				System.out.println("Someone has already signed up with this email address!");
-				isMailCorrect = false;
-			}
-			
-		}while (!isMailCorrect);
-		return null;*/ // Benim çözümüm
 		while (true) {
 			System.out.print("Please enter your e-mail address: ");
 			String mail = sc.nextLine();
@@ -160,7 +143,7 @@ public class Main {
 				continue;
 			}
 			return mail;
-			
+
 		}
 	}
 	//TODO: @hotmail.com / @gmail.com için geliştirmeler yap.
@@ -170,14 +153,14 @@ public class Main {
 		}
 		return true;
 	}
-	
+
 	//TODO: kullanıcının sadece numarik ve sadece numara uzunluğunda değer girmesini sağla!
 	private static String askUserPhoneNumber() {
 		System.out.print("Please enter your mobile: +90 ");
 		String phoneNum = sc.nextLine();
 		return phoneNum;
 	}
-	
+
 	private static String getUserTcNo() {
 		String tcno;
 		while (true) {
@@ -206,7 +189,7 @@ public class Main {
 		}
 		return true;
 	}
-	
+
 	private static String askUserName() {
 		String username;
 		while (true) {
@@ -227,7 +210,7 @@ public class Main {
 			return username;
 		}
 	}
-	
+
 	private static String askPassword() {
 		String password;
 		String reEnteredPass;
@@ -251,25 +234,9 @@ public class Main {
 		}
 	}
 	// > --- Case 1 : End --- <
-	
+
 	// > --- Case 2 : Start --- <
 	private static User userLogin() {
-		/*String username;
-		String password;
-		int userIndex;
-		username = askUserName();
-		userIndex = UserDB.findUsernameIndex(username);
-		for (int i = 0; i <3 ; i++){
-			System.out.print("Please enter your password: ");
-			password = sc.nextLine();
-			if (UserDB.isRightUser(password, userIndex)){
-				System.out.println("Successfully logged in!");
-				return userIndex;
-			}
-			System.out.println((i+1) +". wrong password!");
-		}
-		System.out.println("You've had 3 attempts! Unable to log in!");
-		return -1;*/ // benim çözüm
 		System.out.print("Please enter your username: ");
 		String username = sc.nextLine();
 		System.out.print("Please enter your password: ");
@@ -302,7 +269,7 @@ public class Main {
 			}
 			userInput = userMenuFunctions(userInput, user);
 		}while (userInput != 0);
-		
+
 	}
 	private static int userMenuFunctions(int userInput, User user) {
 		switch (userInput) {
@@ -323,7 +290,7 @@ public class Main {
 					System.out.println("The new password has been set.");
 					return 0;
 				}
-				
+
 				break;
 			}
 			case 0 : {
@@ -333,7 +300,7 @@ public class Main {
 		}
 		return userInput;
 	}
-	
+
 	// > --- Login Case 1: Start --- <
 	private static void showUserInfo(int id) {
 		User user = UserDB.findById(id);
@@ -342,7 +309,7 @@ public class Main {
 		}
 	}
 	// > --- Login Case 1: End --- <
-	
+
 	// > --- Login Case 7: Start --- <
 	private static void changeMobile (User user){
 		//TODO: Potansiyel iptal islemleri icin case yapisi kurulabilir.
@@ -351,7 +318,7 @@ public class Main {
 		UserDB.update(user);
 	}
 	// > --- Login Case 7: End --- <
-	
+
 	// > --- Login Case 8: Start --- <
 	private static void changeEmail (User user){
 		//TODO: Potansiyel iptal islemleri icin case yapisi kurulabilir.
@@ -360,7 +327,7 @@ public class Main {
 		UserDB.update(user);
 	}
 	// > --- Login Case 8: End --- <
-	
+
 	// > --- Login Case 9: Start --- <
 	private static boolean changePassword(User user){
 		//TODO: Potansiyel iptal islemleri icin case yapisi kurulabilir.
@@ -380,16 +347,16 @@ public class Main {
 	}
 	// > --- Login Case 9: End --- <
 	// > --- Case 2 : End --- <
-	
+
 	// > --- Case 3 : Start --- <
 	private static User changeForgottenPassword() {
 		System.out.print("Please enter your ID: ");
 		String tc = sc.nextLine();
 		System.out.print("Please enter your e-mail address: ");
 		String mail = sc.nextLine();
-		
+
 		User user = UserDB.findByTcEmail(tc,mail);
-		
+
 		if (user == null){
 			System.out.println("Information you entered are not match!");
 			return null;
@@ -402,7 +369,7 @@ public class Main {
 		return user;
 	}
 	// > --- Case 3 : End --- <
-	
+
 	// > --- Case 8 : Start --- <
 	private static void generateData() {
 		for (int i = 1; i< 10; i++){
@@ -419,7 +386,7 @@ public class Main {
 		}
 	}
 	// > --- Case 8 : End --- <
-	
+
 	// > --- Case 9 : Start --- <
 	private static User[] showUsers() {
 		User[] userArray = UserDB.findAll();
@@ -430,18 +397,18 @@ public class Main {
 	}
 	// > --- Case 9 : End --- <
 	//* >--- kullanıcı giriş / kayıt menu bitiş----<
-	
-	
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
 //	private static void changeForgottenPassword() {
 //		int userIndex;
 //		String userTcNO;
@@ -460,6 +427,6 @@ public class Main {
 //			String newPassword = askPassword();
 //		UserDB.updatePasword(newPassword, userIndex);
 //	}
-	
-	
+
+
 	}

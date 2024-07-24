@@ -1,4 +1,4 @@
-package week04.day03;
+package kullanici_kayit_sistemi.original;
 
 public class UserList {
 
@@ -66,7 +66,7 @@ public class UserList {
 	/*
 	*1.4 - addAll isimli bir metot yazalım. Dışarıdan dizi alsın, aldığı dizinin elemanlarının hepsini sayı dizimize
 	* eklesin*/
-	public void addAll(User [] userArray) {
+	public void addAll(User[] userArray) {
 		if (this.arrSize == 0){
 			this.userArray = userArray;
 			this.arrSize = userArray.length;

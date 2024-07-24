@@ -1,8 +1,10 @@
-package week04.day03;
+package kullanici_kayit_sistemi.refactored;
+
+import kullanici_kayit_sistemi.original.Entities;
 
 import java.time.LocalDate;
 
-public class Massage {
+public class Massage extends Entities {
 	protected int id;
 	protected User receiver;
 	protected User sender;
@@ -47,5 +49,10 @@ public class Massage {
 	
 	public void setSentDate(LocalDate sentDate) {
 		this.sentDate = sentDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "Massage{" + "Content='" + getContent() + '\'' + ", id=" + getId() + ", receiver=" + getReceiver() + ", sender=" + getSender() + ", sentDate=" + getSentDate() + ", content='" + getContent() + '\'' + '}';
 	}
 }

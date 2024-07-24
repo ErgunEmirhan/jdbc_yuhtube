@@ -1,4 +1,4 @@
-package week04.day03;
+package kullanici_kayit_sistemi.original;
 
 public class MailList {
 	private Mail[] mailArray;
@@ -65,7 +65,7 @@ public class MailList {
 	/*
 	 *1.4 - addAll isimli bir metot yazalım. Dışarıdan dizi alsın, aldığı dizinin elemanlarının hepsini sayı dizimize
 	 * eklesin*/
-	public Mail[] addAll(Mail [] mailArray) {
+	public Mail[] addAll(Mail[] mailArray) {
 //		if (this.arrSize == 0){
 //			this.mailArray = mailArray;
 //			this.arrSize = mailArray.length;

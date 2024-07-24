@@ -1,4 +1,4 @@
-package week04.day03;
+package kullanici_kayit_sistemi.original;
 
 class UserDB {
 	static UserList userList = new UserList();
