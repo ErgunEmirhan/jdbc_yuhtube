@@ -1,4 +1,4 @@
-package kullanici_kayit_sistemi.refactored;
+package kullanici_kayit_sistemi.refactored.entities;
 
 import java.time.LocalDate;
 

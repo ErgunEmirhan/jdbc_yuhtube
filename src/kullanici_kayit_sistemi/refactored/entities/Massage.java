@@ -1,11 +1,9 @@
-package kullanici_kayit_sistemi.refactored;
-
-import kullanici_kayit_sistemi.original.Entities;
+package kullanici_kayit_sistemi.refactored.entities;
 
 import java.time.LocalDate;
 
-public class Massage extends Entities {
-	protected int id;
+public class Massage extends BaseEntity {
+	
 	protected User receiver;
 	protected User sender;
 	protected String Content;
@@ -17,14 +15,6 @@ public class Massage extends Entities {
 	
 	public void setContent(String content) {
 		Content = content;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public User getReceiver() {
