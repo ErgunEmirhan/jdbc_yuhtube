@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DatabaseManager<T extends BaseEntity> implements ICRUD<T>{
 	
-	ArrayList<T> arrayList = new ArrayList<>();
+	protected ArrayList<T> arrayList = new ArrayList<>();
 	
 	@Override
 	public T save(T t) {
