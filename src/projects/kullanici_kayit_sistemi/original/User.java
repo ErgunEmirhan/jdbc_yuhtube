@@ -1,5 +1,4 @@
-package kullanici_kayit_sistemi.refactored.entities;
-
+package projects.kullanici_kayit_sistemi.original;
 
 import java.time.LocalDate;
 
@@ -18,10 +17,11 @@ kayıtTarihi;
 doğumTarihi;
 18 yasindan kucukler kayıt olamasın.
 * */
-public class User extends BaseEntity {
+public class User {
 	//Sınıf değişkenleri:
 	static int idIndex;
 	//Nesne değişkenleri:
+	private int userId;
 	private String name;
 	private String surName;
 	private String mail;
@@ -35,14 +35,14 @@ public class User extends BaseEntity {
 	
 	//Constructor
 	public User(){
-		this.id = idIndex++;
+		this.userId = idIndex++;
 		
 		this.signUpDate = LocalDate.now();
 	}
 	
 	//Getters
 	public int getId() {
-		return id;
+		return userId;
 	}
 	public LocalDate getSignUpDate() {
 		return signUpDate;

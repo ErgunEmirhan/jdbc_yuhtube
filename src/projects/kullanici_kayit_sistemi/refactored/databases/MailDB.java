@@ -1,8 +1,8 @@
-package kullanici_kayit_sistemi.refactored.databases;
+package projects.kullanici_kayit_sistemi.refactored.databases;
 
-import kullanici_kayit_sistemi.refactored.entities.Mail;
-import kullanici_kayit_sistemi.refactored.entities.User;
-import kullanici_kayit_sistemi.refactored.utility.DatabaseManager;
+import projects.kullanici_kayit_sistemi.refactored.entities.Mail;
+import projects.kullanici_kayit_sistemi.refactored.entities.User;
+import projects.kullanici_kayit_sistemi.refactored.utility.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.List;

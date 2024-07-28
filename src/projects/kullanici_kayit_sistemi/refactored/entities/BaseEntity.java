@@ -1,4 +1,4 @@
-package kullanici_kayit_sistemi.refactored.entities;
+package projects.kullanici_kayit_sistemi.refactored.entities;
 
 public class BaseEntity {
 	protected int id;

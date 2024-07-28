@@ -1,9 +1,9 @@
-package kullanici_kayit_sistemi.refactored;
+package projects.kullanici_kayit_sistemi.refactored;
 
-import kullanici_kayit_sistemi.refactored.databases.MailDB;
-import kullanici_kayit_sistemi.refactored.databases.UserDB;
-import kullanici_kayit_sistemi.refactored.entities.Mail;
-import kullanici_kayit_sistemi.refactored.entities.User;
+import projects.kullanici_kayit_sistemi.refactored.databases.MailDB;
+import projects.kullanici_kayit_sistemi.refactored.databases.UserDB;
+import projects.kullanici_kayit_sistemi.refactored.entities.Mail;
+import projects.kullanici_kayit_sistemi.refactored.entities.User;
 
 import java.time.LocalDate;
 import java.time.Period;

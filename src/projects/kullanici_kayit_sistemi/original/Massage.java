@@ -1,9 +1,9 @@
-package kullanici_kayit_sistemi.refactored.entities;
+package projects.kullanici_kayit_sistemi.original;
 
 import java.time.LocalDate;
 
-public class Massage extends BaseEntity {
-	
+public class Massage {
+	protected int id;
 	protected User receiver;
 	protected User sender;
 	protected String Content;
@@ -15,6 +15,14 @@ public class Massage extends BaseEntity {
 	
 	public void setContent(String content) {
 		Content = content;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public User getReceiver() {
@@ -39,10 +47,5 @@ public class Massage extends BaseEntity {
 	
 	public void setSentDate(LocalDate sentDate) {
 		this.sentDate = sentDate;
-	}
-	
-	@Override
-	public String toString() {
-		return "Massage{" + "Content='" + getContent() + '\'' + ", id=" + getId() + ", receiver=" + getReceiver() + ", sender=" + getSender() + ", sentDate=" + getSentDate() + ", content='" + getContent() + '\'' + '}';
 	}
 }

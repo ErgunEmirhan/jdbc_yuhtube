@@ -1,4 +1,4 @@
-package kullanici_kayit_sistemi.refactored.utility;
+package projects.kullanici_kayit_sistemi.refactored.utility;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package kullanici_kayit_sistemi.original;
+package projects.kullanici_kayit_sistemi.original;
 
 class MailDB {
 	static MailList mailList = new MailList();

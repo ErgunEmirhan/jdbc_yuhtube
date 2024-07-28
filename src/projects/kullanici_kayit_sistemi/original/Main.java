@@ -1,4 +1,4 @@
-package kullanici_kayit_sistemi.original;
+package projects.kullanici_kayit_sistemi.original;
 
 import java.time.LocalDate;
 import java.time.Period;
