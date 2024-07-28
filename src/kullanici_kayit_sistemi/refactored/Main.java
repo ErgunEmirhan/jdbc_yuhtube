@@ -5,7 +5,6 @@ import kullanici_kayit_sistemi.refactored.databases.UserDB;
 import kullanici_kayit_sistemi.refactored.entities.Mail;
 import kullanici_kayit_sistemi.refactored.entities.User;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.InputMismatchException;
@@ -357,7 +356,7 @@ public class Main {
 				break;
 			}
 			case 3: { //send a mail
-				findUserByMailAddress(user);
+				newMail(user);
 				break;
 			}
 			case 0 : {
@@ -399,7 +398,7 @@ public class Main {
 	}
 	
 	// > --- Mail Case 3: Start --- <
-	private static void findUserByMailAddress(User senderUser) {
+	private static void newMail(User senderUser) {
 		while (true){
 			System.out.print("Please enter a mail address to send: ");
 			String receiverMail = sc.nextLine();
@@ -408,28 +407,23 @@ public class Main {
 				continue;
 			}
 			if (userDB.existByEmail(receiverMail)){
-				User receiverUser =  userDB.getUserByEmail(receiverMail);
-				sendAMail(senderUser, receiverUser);
+				User receiverUser =  userDB.findByEmail(receiverMail);
+				System.out.print("Please enter a title: ");
+				String title = sc.nextLine();
+				System.out.println("Please enter the mail content to send: ");
+				String content = sc.nextLine();
+				
+				Mail mail = new Mail();
+				mail.setReceiver(receiverUser);
+				mail.setSender(senderUser);
+				mail.setTitle(title);
+				mail.setContent(content);
+				mailDB.save(mail);
 				return;
 			}
 			else System.out.println("\nIncorrect e-mail address please try again!");
 		}
 		
-	}
-	private static void sendAMail(User senderUser, User receiverUser) {
-		String title;
-		String content;
-		System.out.print("Please enter a title: ");
-		title = sc.nextLine();
-		System.out.println("Please enter the mail content to send: ");
-		content = sc.nextLine();
-		
-		Mail mail = new Mail();
-		mail.setReceiver(receiverUser);
-		mail.setSender(senderUser);
-		mail.setTitle(title);
-		mail.setContent(content);
-		mailDB.save(mail);
 	}
 	// > --- Mail Case 3: End --- <
 	// > --- Login Case 2: End --- <

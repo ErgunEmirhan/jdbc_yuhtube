@@ -3,8 +3,6 @@ package kullanici_kayit_sistemi.refactored.databases;
 import kullanici_kayit_sistemi.refactored.entities.User;
 import kullanici_kayit_sistemi.refactored.utility.DatabaseManager;
 
-import java.util.List;
-
 public class UserDB extends DatabaseManager<User> {
 	
 	public boolean existByEmail(String mail) {
@@ -15,7 +13,7 @@ public class UserDB extends DatabaseManager<User> {
 		}
 		return false;
 	}
-	public User getUserByEmail(String mail) {
+	public User findByEmail(String mail) {
 		for (User user : arrayList) {
 			if (user.getMail().equals(mail)) {
 				return user;

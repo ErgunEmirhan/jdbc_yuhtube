@@ -17,10 +17,7 @@ public class MailDB extends DatabaseManager<Mail> {
 				mailList.add(mail);
 			}
 		}
-		if (mailList.size() != 0) {
-			return mailList;
-		}
-		else return mailList;
+		return mailList;
 	}
 	
 	public List<Mail> findSentMailsByUser(User user) {
