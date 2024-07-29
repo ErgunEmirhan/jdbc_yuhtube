@@ -2,10 +2,19 @@ package week06.day01.interface_sorulari.quest001;
 
 public class Calisan {
 	private String isim;
-	private String soyIsim;
+	private String soyisim;
 	private String unvan;
 	private double maas;
 	
+	public void maasAl(){
+		System.out.println("maaş alındı!");
+	}
+	public void izinAl(){
+		System.out.println("izin alindi!");
+	}
+	public void fazlaMesayiYap(){
+		System.out.println("fazla mesai yapildi");
+	}
 	
 	//Getter & Setter
 	public String getIsim() {
@@ -24,12 +33,12 @@ public class Calisan {
 		this.maas = maas;
 	}
 	
-	public String getSoyIsim() {
-		return soyIsim;
+	public String getSoyisim() {
+		return soyisim;
 	}
 	
-	public void setSoyIsim(String soyIsim) {
-		this.soyIsim = soyIsim;
+	public void setSoyisim(String soyIsim) {
+		this.soyisim = soyIsim;
 	}
 	
 	public String getUnvan() {
@@ -40,19 +49,13 @@ public class Calisan {
 		this.unvan = unvan;
 	}
 	
-	public void maasAl(){
-		System.out.println("maaş alındı!");
-	}
-	public void izinAl(){
-		System.out.println("izin alindi!");
-	}
 	
-	public void fazlaMesayiYap(){
-		System.out.println("fazla mesai yapildi");
-	}
 	
 	@Override
 	public String toString() {
-		return "Calisan{" + "isim='" + getIsim() + '\'' + ", soyIsim='" + getSoyIsim() + '\'' + ", unvan='" + getUnvan() + '\'' + ", maas=" + getMaas() + '}';
+		return "isim='" + getIsim() + '\'' +
+				", soyIsim='" + getSoyisim() + '\'' +
+				", unvan='" + getUnvan() + '\'' +
+				", maas=" + getMaas();
 	}
 }

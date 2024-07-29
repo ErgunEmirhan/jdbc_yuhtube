@@ -3,8 +3,8 @@ package week06.day01.interface_sorulari.quest001;
 public class Muhendis extends Calisan implements ISahaCalismasiYapabilir,IMaasaGoreUnvanAlabilir{
 	public Muhendis(String isim, String soyIsim, double maas) {
 		this.setIsim(isim);
-		this.setSoyIsim(soyIsim);
-		this.setSoyIsim(soyIsim);
+		this.setSoyisim(soyIsim);
+		this.setSoyisim(soyIsim);
 		this.setMaas(maas);
 		setUnvan(maas);
 
@@ -53,7 +53,18 @@ public class Muhendis extends Calisan implements ISahaCalismasiYapabilir,IMaasaG
 	}
 	
 	@Override
+	public void setMaas(double maas) {
+		super.setMaas(maas);
+		setUnvan(maas);
+	}
+	
+	@Override
 	public String toString() {
-		return "Muhendis{" + "isim='" + getIsim() + '\'' + ", maas=" + getMaas() + ", soyIsim='" + getSoyIsim() + '\'' + ", unvan='" + getUnvan() + '\'' + '}';
+		return this.getClass().getSuperclass().getSimpleName()
+				+"Muhendis{" +
+				"isim='" + getIsim() + '\'' +
+				", maas=" + getMaas() +
+				", soyIsim='" + getSoyisim() + '\'' +
+				", unvan='" + getUnvan() + '\'' + '}';
 	}
 }
