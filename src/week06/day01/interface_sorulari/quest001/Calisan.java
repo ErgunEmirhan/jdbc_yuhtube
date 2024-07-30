@@ -6,6 +6,10 @@ public class Calisan {
 	private String unvan;
 	private double maas;
 	
+	{
+		CalisanDB.calisanlar.add(this);
+	}
+	
 	public void maasAl(){
 		System.out.println("maaş alındı!");
 	}

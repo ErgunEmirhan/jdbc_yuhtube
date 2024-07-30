@@ -8,7 +8,8 @@ public class Tekniker extends Calisan implements ISahaCalismasiYapabilir{
 //	}
 	
 	@Override
-	public void sahaCalismasiYap() {
+	public boolean sahaCalismasiYap() {
 		System.out.println(this.getClass().getSimpleName() + " Saha çalışmasında...");
+		return true;
 	}
 }

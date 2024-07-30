@@ -2,6 +2,7 @@ package week06.day01.interface_sorulari.quest001;
 
 public class InsanKaynaklari extends Calisan {
 	
+	
 	public  double zamYap(Calisan calisan, double zamOrani){
 		double zamliMaas = 0;
 		if (zamOrani <=1){

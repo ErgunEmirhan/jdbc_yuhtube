@@ -47,8 +47,9 @@ public class Muhendis extends Calisan implements ISahaCalismasiYapabilir,IMaasaG
 	}
 	
 	@Override
-	public void sahaCalismasiYap() {
+	public boolean sahaCalismasiYap() {
 		System.out.println("mühendis saha çalışmasında...");
+		return true;
 		
 	}
 	
