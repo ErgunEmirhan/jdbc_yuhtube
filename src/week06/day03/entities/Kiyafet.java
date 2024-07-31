@@ -14,6 +14,16 @@ public class Kiyafet extends Urun{
 		this.color = color;
 	}
 	
+	public EColor getColor() {
+		return color;
+	}
+	
+	
+	public ESize getSize() {
+		return size;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Kiyafet{" + "color=" + color + ", size=" + size + super.toString()+ '}';

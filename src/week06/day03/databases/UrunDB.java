@@ -1,11 +1,8 @@
 package week06.day03.databases;
 
-import week06.day03.entities.AltGiyim;
-import week06.day03.entities.Kiyafet;
-import week06.day03.entities.Urun;
-import week06.day03.entities.UstGiyim;
-import week06.day03.utility.EColor;
-import week06.day03.utility.ESize;
+import week06.day03.entities.*;
+import week06.day03.utility.*;
+
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -38,6 +35,7 @@ public class UrunDB{
 	public static void urunListAll() {
 		for (Urun urun: urunList){
 			System.out.println(urun.getUrunID()+"- "+ urun.getUrunAdi()+ " fiyat: "+ urun.getFiyat());
+			
 		}
 	}
 	
