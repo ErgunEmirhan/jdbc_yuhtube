@@ -39,7 +39,13 @@ public class UrunDB{
 		}
 	}
 	
-	
+	public static void updateStok(Integer urunID, Integer sepetAdet) {
+		for (Urun urun : urunList){
+			if (urun.getUrunID() == urunID){
+				urun.setStokAdet(urun.getStokAdet()-sepetAdet);
+			}
+		}
+	}
 	
 	
 	
@@ -91,4 +97,6 @@ public class UrunDB{
 		}
 		return urunList;
 	}
+	
+	
 }

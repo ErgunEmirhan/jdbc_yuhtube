@@ -2,7 +2,6 @@ package week06.day03.databases;
 
 import week06.day03.entities.SepetDetay;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,11 @@ public class SepetDB {
 		sepetList.add(sepetUrun);
 	}
 	
-	public static void sepetListAll() {
+	public static List<SepetDetay> sepetListAll() {
 		for (SepetDetay sepetUrun : sepetList) {
 			System.out.println(sepetUrun);
 		}
+		return sepetList;
 	}
 	
 	public static SepetDetay findBySepetUrunID(Integer urunID) {

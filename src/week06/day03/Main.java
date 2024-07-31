@@ -6,7 +6,10 @@ import week06.day03.entities.Kiyafet;
 import week06.day03.entities.SepetDetay;
 import week06.day03.entities.Urun;
 
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
@@ -41,7 +44,7 @@ public class Main {
 		do {
 			System.out.println("### TREDYOL MENU ###");
 			System.out.println("1.Urunleri Listele");
-			System.out.println("2.ID ile detaylı Listele");
+			System.out.println("2.Ürün numarasi ile detaylı Listele");
 			System.out.println("3.Sepet Menu");
 			System.out.println("0.Çıkış");
 			System.out.print("selection: ");
@@ -54,23 +57,17 @@ public class Main {
 			}
 			finally {
 				sc.nextLine();
+				System.out.println();
 			}
 			switch (userInput) {
 				case 1: { // Urun listele detaysız id-adi-fiyat
 					System.out.println("---- Urunlerin listesi ------");
 					UrunDB.urunListAll();
+					System.out.println("-----------------------------");
 					System.out.println();
 					break;
 				}
 				case 2: { // Sepet urun ekleme
-					/*
-					* Urunleri listele id - tür - adi - ürün adedi - fiyati
-					* id seçimi ile sepete kaç tane ürün eklememiz gerektiğini soracak
-					* ekleme işlemini sepetDB içerisine ArrayList ile gerçekleştir.
-					* Ekleme işlemi ürün adet
-					* SepetAdet = ürün adetlerin toplami
-					* toplamFiyat = ürün fiyatlarin toplami
-					* */
 					Urun urun = urunSelectByID();
 					sepeteEklenme(urun);
 					
@@ -132,9 +129,10 @@ public class Main {
 				}
 				case 4: {
 					System.out.println("---- Sepet İçeriği ------");
-					SepetDB.sepetListAll();
+					List<SepetDetay> sepetList = SepetDB.sepetListAll();
 					System.out.println();
-					
+					satinAl(sepetList);
+					break;
 				}
 				case 0: {
 					System.out.println("Ana Menüye dönülüyor...");
@@ -146,23 +144,54 @@ public class Main {
 		} while (userInput != 0);
 	}
 	
+	private static void satinAl(List<SepetDetay> sepetList) {
+		double toplamFiyat = 0.0;
+		String UUID = String.valueOf(java.util.UUID.randomUUID());
+		int userInput;
+		for (SepetDetay sepet: sepetList){
+			toplamFiyat += sepet.getToplamFiyat();
+		}
+		System.out.println("Fatura Numarası: "+ UUID);
+		System.out.println("toplam fiyat: "+ toplamFiyat);
+		System.out.println("1- satin alma işlemini gerçekleştir");
+		System.out.println("0- iptal");
+		userInput = sc.nextInt();
+		if (userInput == 0){
+			System.out.println("geri dönülüyor...");
+		}
+		else {
+			System.out.println("Satin alma işlemi gerçekleştirildi...");
+			for (SepetDetay sepet: sepetList){
+				UrunDB.updateStok(sepet.getUrunID(), sepet.getSepetAdet());
+			}
+			SepetDB.removeAllSepet();
+		}
+		
+	}
 	
 	
 	private static Urun urunSelectByID() {
 		int id;
 		do {
-			System.out.println("Geri Dönmek için 0");
-			System.out.print("Ürün sıra numarasını giriniz:");
+			System.out.println("0-Geri Dön");
+			System.out.print("Ürün numarasını giriniz:");
 			
 			id = sc.nextInt();
 			Urun urun = UrunDB.findByID(id);
 			if (urun == null) {
-				System.out.println("Böyle bir ürün yok!");
+				System.out.println("\nBöyle bir ürün yok!\n");
 			}
 			else {
+				System.out.println();
+				System.out.println("----- Ürün Detay ------");
 				System.out.println(urun.getUrunID() + "- " + urun.getUrunAdi() + " fiyat: " + urun.getFiyat());
-				System.out.println("Stok Adedi: " + urun.getStokAdet() + " Rengi: " + ((Kiyafet) urun).getColor() + " " +
+				System.out.println("Stok Adedi: " + urun.getStokAdet() +
+						                   " Rengi: " + ((Kiyafet) urun).getColor() + " " +
 						                   "Beden: " + ((Kiyafet) urun).getSize());
+				System.out.println();
+				System.out.println("----- AÇIKLAMA ------");
+				addUrunDescription(urun);
+				System.out.println();
 				return urun;
 			}
 			
@@ -170,20 +199,40 @@ public class Main {
 		return null;
 	}
 	
+	private static void addUrunDescription(Urun urun) {
+		Random rand = new Random();
+		int x= rand.nextInt(101);
+		int y= 100-x;
+		int[] options={30,60,90};
+		int randomIndex=rand.nextInt(options.length);
+		int selectedValue = options[randomIndex];
+		urun.setUrunDescription(urun.getUrunAdi()+" %"+x+" polyester" + " %"+y +" pamuktan uretilmistir.\n"+
+				                        selectedValue+" derecede yikanmasi uygundur."+" 15 gun icinde " +
+				                        "ucretsiz iade edebilirsiniz."+" Incelemis oldugunuz urunun satis " +
+				                        "fiyatini satici belirlemektedir.");
+		System.out.println(urun.getUrunDescription());
+	}
+	
 	private static void sepeteEklenme(Urun urun) {
 		int userInput;
 		SepetDetay sepetUrun;
-		System.out.println("Geri Dönmek için 0");
-		System.out.println("Ürünü sepete eklemek için 1");
+		System.out.println("0-Geri Dön");
+		System.out.println("1-Ürünü sepete ekle");
 		SepetDetay sepet = new SepetDetay();
 		System.out.print("Selection: ");
 		userInput = sc.nextInt();
+		System.out.println();
 		if (userInput == 1) {
 			int urunStokAdet = urun.getStokAdet();
 			System.out.println("Stok Adedi: " + urun.getStokAdet());
+			System.out.println();
+			if (urunStokAdet == 0){
+				System.out.println("Stok'da ürün tükenmiştir!");
+				return;
+			}
 			do {
-				System.out.println("Geri Dönmek için 0");
-				System.out.print("Kaç tane eklensin: ");
+				System.out.println("0-Geri Dön");
+				System.out.print("Gaç dane: ");
 				userInput = sc.nextInt();
 				if (urunStokAdet < userInput) {
 					System.out.println("\nFazla adet girişi yaptınız!\n");
@@ -228,7 +277,7 @@ public class Main {
 				System.out.println("Sepette böyle bir ürün yok!");
 			}
 			else {
-				System.out.println("Eksitmek istediginiz miktar: ");
+				System.out.print("Eksitmek istediginiz miktar: ");
 				userInput = sc.nextInt();
 				silindiMi = SepetDB.sepettenUrunEksilt(sepetUrun, userInput);
 			}
