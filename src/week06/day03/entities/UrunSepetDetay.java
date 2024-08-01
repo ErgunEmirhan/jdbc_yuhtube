@@ -3,23 +3,31 @@ package week06.day03.entities;
 import java.text.DecimalFormat;
 
 //TODO: Biling detaydan extend et.
-public class SepetDetay{
+public class UrunSepetDetay{
 	static private Integer sepetDetayIDCounter = 0;
 	static DecimalFormat df = new DecimalFormat("#.00");
 	
 	private Integer sepetDetayID;
 	private Integer UrunID;
+	private Integer userID;
 	private String urunAdi;
 	private Integer sepetAdet;
 	private Double adetFiyat;
 	private Double toplamFiyat;
 	
+	public Integer getUserID() {
+		return userID;
+	}
+	
+	public void setUserID(Integer userID) {
+		this.userID = userID;
+	}
 	
 	public Integer getSepetDetayID() {
 		return sepetDetayID;
 	}
 	
-	public SepetDetay() {
+	public UrunSepetDetay() {
 		this.sepetDetayID = sepetDetayIDCounter++;
 	}
 	
