@@ -27,6 +27,7 @@ public class TredyolApp {
 				System.out.println("4.Kullanici İşlemleri");
 			}else if(user != null){
 				System.out.println("4.Kullanici Detaylari");
+				System.out.println("5.Sipariş Geçmişini Görüntle");
 			}
 			System.out.println("0.Çıkış");
 			System.out.print("selection: ");
@@ -68,7 +69,17 @@ public class TredyolApp {
 					break;
 				}
 				case 5: {
+					if (user != null){
+						satisGecmisi(user);
+					}
+					else {
+						System.out.println("\nGeçerli bir değer giriniz!\n");
+					}
+					break;
+				}
+				case 6: {
 					SatisDB.sepetListAll();
+					break;
 				}
 				case 9:{
 					UrunDB.generateAltGiyim(10);
@@ -83,6 +94,20 @@ public class TredyolApp {
 					System.out.println("\nGeçerli bir değer giriniz!\n");
 			}
 		} while (userInput != 0);
+	}
+	
+	private static void satisGecmisi(User user) {
+		System.out.println("\n----- Satış Geçmişi ------\n");
+		int userID = user.getId();
+		List<Satis> userSatisList = SatisDB.findSatisByUserID(userID);
+		if (userSatisList.isEmpty()){
+			System.out.println("Satış geçmişi boş!\n");
+		}
+		else {
+			for (Satis satis : userSatisList){
+				System.out.println(satis);
+			}
+		}
 	}
 	
 	private static User sepetMenu(User user) {
