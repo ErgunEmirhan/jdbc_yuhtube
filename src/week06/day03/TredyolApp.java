@@ -1,11 +1,11 @@
 package week06.day03;
 
+import projects.kullanici_kayit_sistemi.refactored.entities.User;
 import week06.day03.databases.SepetUrunDetayDB;
 import week06.day03.databases.UrunDB;
 import week06.day03.entities.Kiyafet;
 import week06.day03.entities.UrunSepetDetay;
 import week06.day03.entities.Urun;
-import week06.day03.entities.User;
 
 import java.util.List;
 import java.util.Random;
@@ -17,13 +17,17 @@ public class TredyolApp {
 	
 	public static void tredyolMenu() {
 		int userInput = -1;
+		User user = null;
 		do {
 			System.out.println("### TREDYOL MENU ###");
 			System.out.println("1.Urunleri Listele");
 			System.out.println("2.Ürün numarasi ile detaylı Listele");
 			System.out.println("3.Sepet Menu");
-			System.out.println("4.Kullanici Kayit");
-			System.out.println("5.User Interface");
+			if (user == null) {
+				System.out.println("4.Kullanici İşlemleri");
+			}else if(user != null){
+				System.out.println("4.User Interface");
+			}
 			System.out.println("0.Çıkış");
 			System.out.print("selection: ");
 			try {
@@ -52,11 +56,15 @@ public class TredyolApp {
 					break;
 				}
 				case 3: { // Sepet görüntüle
-					sepetMenu();
+					user = sepetMenu(user);
 					break;
 				}
 				case 4: { // Sepet görüntüle
-					UserApp.menu();
+					if (user != null){
+						user = UserApp.userInterface(user);
+					}else if (user == null){
+						user = UserApp.userMenu();
+					}
 					break;
 				}
 				case 9:{
@@ -74,7 +82,7 @@ public class TredyolApp {
 		} while (userInput != 0);
 	}
 	
-	private static void sepetMenu() {
+	private static User sepetMenu(User user) {
 		int userInput = -1;
 		do {
 			System.out.println("### SEPET MENU ###");
@@ -110,10 +118,24 @@ public class TredyolApp {
 					break;
 				}
 				case 4: {
-					System.out.println("---- Sepet İçeriği ------");
-					List<UrunSepetDetay> sepetList = SepetUrunDetayDB.sepetListAll();
-					System.out.println();
-					satinAl(sepetList);
+					if (user != null){
+						System.out.println("---- Sepet İçeriği ------");
+						List<UrunSepetDetay> sepetList = SepetUrunDetayDB.sepetListAll();
+						System.out.println();
+						satinAl(sepetList);
+						return user;
+					}
+					else {
+						System.out.println("Giriş yapmadan devam edemezsiniz");
+						System.out.println("1-Giriş Yap/ Kayıt ol");
+						System.out.println("0-Çıkış");
+						System.out.print("selection: ");
+						userInput = sc.nextInt();
+						
+						if (userInput == 1){
+							user = UserApp.userMenu();
+						}
+					}
 					break;
 				}
 				case 0: {
@@ -124,6 +146,7 @@ public class TredyolApp {
 					System.out.println("\nGeçerli bir değer giriniz!\n");
 			}
 		} while (userInput != 0);
+		return user;
 	}
 	
 	private static void satinAl(List<UrunSepetDetay> sepetList) {

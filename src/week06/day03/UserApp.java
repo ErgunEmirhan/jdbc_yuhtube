@@ -17,7 +17,7 @@ public class UserApp {
 	static MailDB mailDB = new MailDB();
 	
 	// kullanıcı giriş/ kayıt menusu
-	public static void menu() {
+	public static User userMenu() {
 		int userInput = -1;
 		System.out.println("\n---Welcome to the program---");
 		do {
@@ -38,46 +38,39 @@ public class UserApp {
 			finally {
 				sc.nextLine();
 			}
-			menuFunctions(userInput);
-			
+			switch (userInput) {
+				case 1: {
+					User user = userRegister();
+					break;
+				}
+				case 2: {
+					User user = userLogin();
+					return user;
+					
+				}
+				case 3:{
+					changeForgottenPassword();
+					break;
+				}
+				case 8: {
+					generateData();
+					break;
+				}
+				case 9: {
+					showUsers();
+					break;
+				}
+				case 0 : {
+					System.out.println("Please have nice day!");
+					break;
+				}
+				default:
+					System.out.println("Please enter a valid value!");
+			}
 		} while (userInput != 0);
 		
-		
+		return null;
 	}
-	
-	private static void menuFunctions(int userInput) {
-		switch (userInput) {
-			case 1: {
-				User user = userRegister();
-				break;
-			}
-			case 2: {
-				User user = userLogin();
-				
-				break;
-			}
-			case 3:{
-				changeForgottenPassword();
-				break;
-			}
-			case 8: {
-				generateData();
-				break;
-			}
-			case 9: {
-				showUsers();
-				break;
-			}
-			case 0 : {
-				System.out.println("Please have nice day!");
-				break;
-			}
-			default:
-				System.out.println("Please enter a valid value!");
-		}
-	}
-	
-	
 	
 	// > --- Case 1 : Start --- <
 	private static User userRegister() {
@@ -250,7 +243,7 @@ public class UserApp {
 		}
 		return user;
 	}
-	private static void userInterface(User user) {
+	public static User userInterface(User user) {
 		int userInput = -1;
 		do {
 			System.out.println("### USER INTERFACE ###");
@@ -269,44 +262,41 @@ public class UserApp {
 			finally {
 				sc.nextLine();
 			}
-			userInput = userMenuFunctions(userInput, user);
-		}while (userInput != 0);
-		
-	}
-	private static int userMenuFunctions(int userInput, User user) {
-		switch (userInput) {
-			case 1: { // profile
-				showUserInfo(user.getId());
-				break;
-			}
-			case 2: { // Mail user interface
-				mailUserInterface(user);
-				break;
-			}
-			case 7: { //mobile  değiş
-				changeMobile(user);
-				break;
-			}
-			case 8: { //email  değiş
-				changeEmail(user);
-				break;
-			}
-			case 9: { // şifre değiş
-				if (changePassword(user)){
-					System.out.println("The new password has been set.");
-					return 0;
+			
+			switch (userInput) {
+				case 1: { // profile
+					showUserInfo(user.getId());
+					break;
 				}
-				
-				break;
+				case 2: { // Mail user interface
+					mailUserInterface(user);
+					break;
+				}
+				case 7: { //mobile  değiş
+					changeMobile(user);
+					break;
+				}
+				case 8: { //email  değiş
+					changeEmail(user);
+					break;
+				}
+				case 9: { // şifre değiş
+					if (changePassword(user)) {
+						System.out.println("The new password has been set.");
+						userInput = 0;
+						return null;
+					}
+					
+					break;
+				}
+				case 0: {
+					System.out.println("Returning to home page...");
+					return null;
+				}
 			}
-			case 0 : {
-				System.out.println("Returning to home page...");
-				break;
-			}
-		}
-		return userInput;
+			return null;
+		}while (userInput != 0) ;
 	}
-	
 	// > --- Login Case 1: Start --- <
 	private static void showUserInfo(int id) {
 		User user = userDB.findById(id);
