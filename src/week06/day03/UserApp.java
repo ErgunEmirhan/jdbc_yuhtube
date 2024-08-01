@@ -53,9 +53,7 @@ public class UserApp {
 			}
 			case 2: {
 				User user = userLogin();
-				if (user != null){
-					userInterface(user); // kullanıcı başarılı bir şekilde giriş yaparsa bu menü çıkacak
-				}
+				
 				break;
 			}
 			case 3:{
