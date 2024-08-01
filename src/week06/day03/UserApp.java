@@ -1,9 +1,10 @@
 package week06.day03;
 
-import projects.kullanici_kayit_sistemi.refactored.databases.MailDB;
-import projects.kullanici_kayit_sistemi.refactored.databases.UserDB;
-import projects.kullanici_kayit_sistemi.refactored.entities.Mail;
-import projects.kullanici_kayit_sistemi.refactored.entities.User;
+import week06.day03.databases.SepetUrunDetayDB;
+import week06.day03.databases.UserDB;
+import week06.day03.entities.User;
+import  week06.day03.databases.MailDB;
+import week06.day03.entities.Mail;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -283,6 +284,7 @@ public class UserApp {
 				case 9: { // şifre değiş
 					if (changePassword(user)) {
 						System.out.println("The new password has been set.");
+						SepetUrunDetayDB.removeAllSepet();
 						userInput = 0;
 						return null;
 					}
@@ -291,6 +293,7 @@ public class UserApp {
 				}
 				case 0: {
 					System.out.println("Returning to home page...");
+					SepetUrunDetayDB.removeAllSepet();
 					return null;
 				}
 			}

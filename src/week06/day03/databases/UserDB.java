@@ -1,7 +1,7 @@
 package week06.day03.databases;
 
-import projects.kullanici_kayit_sistemi.refactored.entities.User;
-import projects.kullanici_kayit_sistemi.refactored.utility.DatabaseManager;
+import week06.day03.entities.*;
+import week06.day03.utility.*;
 
 public class UserDB extends DatabaseManager<User> {
 	

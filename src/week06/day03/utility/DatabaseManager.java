@@ -1,6 +1,6 @@
 package week06.day03.utility;
 
-import projects.kullanici_kayit_sistemi.refactored.entities.BaseEntity;
+import week06.day03.entities.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;

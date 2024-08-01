@@ -1,8 +1,5 @@
 package week06.day03.entities;
 
-
-import projects.kullanici_kayit_sistemi.refactored.entities.BaseEntity;
-
 import java.time.LocalDate;
 
 /*
@@ -20,7 +17,7 @@ kayıtTarihi;
 doğumTarihi;
 18 yasindan kucukler kayıt olamasın.
 * */
-public class User{
+public class User extends BaseEntity {
 	//Sınıf değişkenleri:
 	static int idIndex;
 	//Nesne değişkenleri:

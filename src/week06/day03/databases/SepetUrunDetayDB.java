@@ -19,6 +19,9 @@ public class SepetUrunDetayDB {
 		}
 		return sepetList;
 	}
+	public static List<UrunSepetDetay> sepetGetAll() {
+		return sepetList;
+	}
 	
 	public static UrunSepetDetay findBySepetUrunID(Integer urunID) {
 		if (sepetList.isEmpty()) {
@@ -61,5 +64,13 @@ public class SepetUrunDetayDB {
 			sepetUrun.setToplamFiyat(sepetUrun.getAdetFiyat(), sepetUrun.getSepetAdet());
 			return true;
 		}
+	}
+	
+	public static Double getToplamSepetFiyat() {
+		Double toplamFiyat = 0.0;
+		for (UrunSepetDetay sepet: sepetList){
+			toplamFiyat += sepet.getToplamFiyat();
+		}
+		return toplamFiyat;
 	}
 }
