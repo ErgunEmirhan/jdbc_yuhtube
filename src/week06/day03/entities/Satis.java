@@ -4,52 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Satis {
-	static int sepetIDCounter = 0;
+	
 	private Integer sepetID;
-	private String faturaUUID;
-	UrunSepetDetay sepetDetayList;
-	Integer user;
-	private Double toplamFiyat;
+	private String fatura_uuid;
+	private Double toplamSatisFiyat;
 	
-	public Satis() {
-		this.sepetID = sepetIDCounter++;
-		
+	public String getFatura_uuid() {
+		return fatura_uuid;
 	}
 	
-	public String getFaturaUUID() {
-		return faturaUUID;
+	public void setFatura_uuid(String fatura_uuid) {
+		this.fatura_uuid = fatura_uuid;
 	}
 	
-	public void setFaturaUUID(String faturaUUID) {
-		this.faturaUUID = faturaUUID;
+	public Integer getSepetID() {
+		return sepetID;
 	}
 	
-	public UrunSepetDetay getSepetDetayList() {
-		return sepetDetayList;
+	public void setSepetID(Integer sepetID) {
+		this.sepetID = sepetID;
 	}
 	
-	public void setSepetDetayList(UrunSepetDetay sepetDetayList) {
-		this.sepetDetayList = sepetDetayList;
+	public Double getToplamSatisFiyat() {
+		return toplamSatisFiyat;
 	}
 	
-	public Double getToplamFiyat() {
-		return toplamFiyat;
-	}
-	
-	public void setToplamFiyat(Double toplamFiyat) {
-		this.toplamFiyat = toplamFiyat;
-	}
-	
-	public Integer getUser() {
-		return user;
-	}
-	
-	public void setUser(Integer user) {
-		this.user = user;
+	public void setToplamSatisFiyat(Double toplamSatisFiyat) {
+		this.toplamSatisFiyat = toplamSatisFiyat;
 	}
 	
 	@Override
 	public String toString() {
-		return "Satis{" + "faturaUUID='" + getFaturaUUID() + '\'' + ", sepetID=" + sepetID + ", sepetDetayList=" + getSepetDetayList() + ", user=" + getUser() + ", toplamFiyat=" + getToplamFiyat() + '}';
+		return "Satis{" + "fatura_uuid='" + getFatura_uuid() + '\'' + ", sepetID=" + getSepetID() + ", toplamSatisFiyat=" + getToplamSatisFiyat() + '}';
 	}
 }

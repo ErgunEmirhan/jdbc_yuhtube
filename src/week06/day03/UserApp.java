@@ -1,6 +1,5 @@
 package week06.day03;
 
-import week06.day03.databases.SepetUrunDetayDB;
 import week06.day03.databases.UserDB;
 import week06.day03.entities.User;
 import  week06.day03.databases.MailDB;
@@ -280,14 +279,14 @@ public class UserApp {
 				case 9: // şifre değiş
 					if (changePassword(user)) {
 						System.out.println("Sifreniz degistirildi.");
-						SepetUrunDetayDB.removeAllSepet();
+//						SepetUrunDetayDB.removeAllSepet();
 						userInput = 0;
 						return null;
 					}
 					break;
 				case 0:
 					System.out.println("Ana Menuye donuluyor...");
-					SepetUrunDetayDB.removeAllSepet();
+//					SepetUrunDetayDB.removeAllSepet();
 					return null;
 			}
 		} while (userInput != 0);

@@ -1,20 +1,19 @@
 package week06.day03;
 
-import week06.day03.databases.SatisDB;
-import week06.day03.databases.SepetUrunDetayDB;
+import week06.day03.databases.SepetDB;
 import week06.day03.databases.UrunDB;
 import week06.day03.entities.*;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class TredyolApp {
 	static Scanner sc = new Scanner(System.in);
 	static DecimalFormat df = new DecimalFormat("#.00");
-	
+	static ArrayList<Sepet> cacheSepet = new ArrayList<>();
 	public static void tredyolMenu() {
 		int userInput = -1;
 		User user = null;
@@ -52,12 +51,12 @@ public class TredyolApp {
 				}
 				case 2: { // Sepet urun ekleme
 					Urun urun = urunSelectByID();
-					sepeteEklenme(urun);
+//					sepeteEklenme(urun);
 					
 					break;
 				}
 				case 3: { // Sepet görüntüle
-					user = sepetMenu(user);
+//					user = sepetMenu(user);
 					break;
 				}
 				case 4: { // Sepet görüntüle
@@ -70,17 +69,17 @@ public class TredyolApp {
 				}
 				case 5: {
 					if (user != null){
-						satisGecmisi(user);
+//						satisGecmisi(user);
 					}
 					else {
 						System.out.println("\nGeçerli bir değer giriniz!\n");
 					}
 					break;
 				}
-				case 6: {
-					SatisDB.sepetListAll();
-					break;
-				}
+//				case 6: { // Satis list all dev
+//					SatisDB.sepetListAll();
+//					break;
+//				}
 				case 9:{
 					UrunDB.generateAltGiyim(10);
 					UrunDB.generateUstGiyim(5);
@@ -96,142 +95,142 @@ public class TredyolApp {
 		} while (userInput != 0);
 	}
 	
-	private static void satisGecmisi(User user) {
-		System.out.println("\n----- Satış Geçmişi ------\n");
-		int userID = user.getId();
-		List<Satis> userSatisList = SatisDB.findSatisByUserID(userID);
-		if (userSatisList.isEmpty()){
-			System.out.println("Satış geçmişi boş!\n");
-		}
-		else {
-			for (Satis satis : userSatisList){
-				System.out.println(satis);
-			}
-		}
-	}
+//	private static void satisGecmisi(User user) {
+//		System.out.println("\n----- Satış Geçmişi ------\n");
+//		int userID = user.getId();
+//		List<Satis> userSatisList = SatisDB.findSatisByUserID(userID);
+//		if (userSatisList.isEmpty()){
+//			System.out.println("Satış geçmişi boş!\n");
+//		}
+//		else {
+//			for (Satis satis : userSatisList){
+//				System.out.println(satis);
+//			}
+//		}
+//	}
 	
-	private static User sepetMenu(User user) {
-		List<UrunSepetDetay> sepetList = SepetUrunDetayDB.sepetGetAll();
-		int userInput = -1;
-		do {
-			System.out.println("### SEPET MENU ###");
-			System.out.println("1.Sepeti Görüntüle");
-			System.out.println("2.Ürün çıkar");
-			System.out.println("3.Sepetten ürün sil");
-			System.out.println("4.Satın al");
-			System.out.println("0.Çıkış");
-			System.out.print("selection: ");
-			try {
-				userInput = sc.nextInt();
-			}
-			catch (Exception e) {
-				System.out.println("\nGeçerli bir değer giriniz!\n");
-				continue;
-			}
-			finally {
-				sc.nextLine();
-			}
-			switch (userInput) {
-				case 1: { // Sepeti Görüntüle
-					System.out.println("---- Sepet İçeriği ------");
-					System.out.println();
-					if (sepetList.isEmpty()){
-						System.out.println("Sepet Boş!");
-					}
-					else SepetUrunDetayDB.sepetListAll();
-					Double toplamSepetFiyat = Double.valueOf(df.format(SepetUrunDetayDB.getToplamSepetFiyat()));
-					System.out.println();
-					System.out.println("toplam fiyat: "+ toplamSepetFiyat);
-					System.out.println();
-					break;
-				}
-				case 2: { // Ürün çıkar
-					sepettenUrunSil(2);
-					break;
-				}
-				case 3: { // Sepetten ürün sil
-					sepettenUrunSil(3);
-					break;
-				}
-				case 4: {
-					
-					if (user != null) {
-						System.out.println("---- Sepet İçeriği ------");
-						System.out.println();
-						satinAlMenu(sepetList, user);
-						System.out.println();
-						return user;
-					}
-					else {
-						System.out.println("Giriş yapmadan devam edemezsiniz");
-						System.out.println("1-Giriş Yap/ Kayıt ol");
-						System.out.println("0-Çıkış");
-						System.out.print("selection: ");
-						userInput = sc.nextInt();
-						
-						if (userInput == 1) {
-							user = UserApp.userMenu();
-						}
-					}
-					break;
-				}
-				case 0: {
-					System.out.println("Ana Menüye dönülüyor...");
-					break;
-				}
-				default:
-					System.out.println("\nGeçerli bir değer giriniz!\n");
-			}
-		} while (userInput != 0);
-		return user;
-	}
+//	private static User sepetMenu(User user) {
+//		List<UrunSepetDetay> sepetList = SepetUrunDetayDB.sepetGetAll();
+//		int userInput = -1;
+//		do {
+//			System.out.println("### SEPET MENU ###");
+//			System.out.println("1.Sepeti Görüntüle");
+//			System.out.println("2.Ürün çıkar");
+//			System.out.println("3.Sepetten ürün sil");
+//			System.out.println("4.Satın al");
+//			System.out.println("0.Çıkış");
+//			System.out.print("selection: ");
+//			try {
+//				userInput = sc.nextInt();
+//			}
+//			catch (Exception e) {
+//				System.out.println("\nGeçerli bir değer giriniz!\n");
+//				continue;
+//			}
+//			finally {
+//				sc.nextLine();
+//			}
+//			switch (userInput) {
+//				case 1: { // Sepeti Görüntüle
+//					System.out.println("---- Sepet İçeriği ------");
+//					System.out.println();
+//					if (sepetList.isEmpty()){
+//						System.out.println("Sepet Boş!");
+//					}
+//					else SepetUrunDetayDB.sepetListAll();
+//					Double toplamSepetFiyat = Double.valueOf(df.format(SepetUrunDetayDB.getToplamSepetFiyat()));
+//					System.out.println();
+//					System.out.println("toplam fiyat: "+ toplamSepetFiyat);
+//					System.out.println();
+//					break;
+//				}
+//				case 2: { // Ürün çıkar
+//					sepettenUrunSil(2);
+//					break;
+//				}
+//				case 3: { // Sepetten ürün sil
+//					sepettenUrunSil(3);
+//					break;
+//				}
+//				case 4: {
+//
+//					if (user != null) {
+//						System.out.println("---- Sepet İçeriği ------");
+//						System.out.println();
+//						satinAlMenu(sepetList, user);
+//						System.out.println();
+//						return user;
+//					}
+//					else {
+//						System.out.println("Giriş yapmadan devam edemezsiniz");
+//						System.out.println("1-Giriş Yap/ Kayıt ol");
+//						System.out.println("0-Çıkış");
+//						System.out.print("selection: ");
+//						userInput = sc.nextInt();
+//
+//						if (userInput == 1) {
+//							user = UserApp.userMenu();
+//						}
+//					}
+//					break;
+//				}
+//				case 0: {
+//					System.out.println("Ana Menüye dönülüyor...");
+//					break;
+//				}
+//				default:
+//					System.out.println("\nGeçerli bir değer giriniz!\n");
+//			}
+//		} while (userInput != 0);
+//		return user;
+//	}
 	
-	private static void satinAlMenu(List<UrunSepetDetay> sepetList, User user) {
-		if (sepetList.isEmpty()){
-			System.out.println("Sepet Boş!");
-			return;
-		}
-		String uuid = String.valueOf(java.util.UUID.randomUUID());
-		int userInput;
-		Double toplamSepetFiyat = Double.valueOf(df.format(SepetUrunDetayDB.getToplamSepetFiyat()));
-		System.out.println("Fatura Numarası: "+ uuid);
-		System.out.println("toplam fiyat: "+ toplamSepetFiyat);
-		System.out.println("1- satin alma işlemini gerçekleştir");
-		System.out.println("0- iptal");
-		System.out.print("selection: ");
-		userInput = sc.nextInt();
-		if (userInput == 0){
-			System.out.println("\ngeri dönülüyor...\n");
-		}
-		else {
-			boolean sattiMi = satinAl(uuid,sepetList ,user, toplamSepetFiyat);
-			if (sattiMi){
-				System.out.println("Satin alma işlemi gerçekleştirildi...");
-				for (UrunSepetDetay sepet: sepetList){
-					UrunDB.updateStok(sepet.getUrunID(), sepet.getSepetAdet());
-				}
-				SepetUrunDetayDB.removeAllSepet();
-			}
-			else{
-				System.out.println("Satin alma işlemi gerçekleştirilemedi!");
-			}
-		}
-		
-	}
+//	private static void satinAlMenu(List<UrunSepetDetay> sepetList, User user) {
+//		if (sepetList.isEmpty()){
+//			System.out.println("Sepet Boş!");
+//			return;
+//		}
+//		String uuid = String.valueOf(java.util.UUID.randomUUID());
+//		int userInput;
+//		Double toplamSepetFiyat = Double.valueOf(df.format(SepetUrunDetayDB.getToplamSepetFiyat()));
+//		System.out.println("Fatura Numarası: "+ uuid);
+//		System.out.println("toplam fiyat: "+ toplamSepetFiyat);
+//		System.out.println("1- satin alma işlemini gerçekleştir");
+//		System.out.println("0- iptal");
+//		System.out.print("selection: ");
+//		userInput = sc.nextInt();
+//		if (userInput == 0){
+//			System.out.println("\ngeri dönülüyor...\n");
+//		}
+//		else {
+//			boolean sattiMi = satinAl(uuid,sepetList ,user, toplamSepetFiyat);
+//			if (sattiMi){
+//				System.out.println("Satin alma işlemi gerçekleştirildi...");
+//				for (UrunSepetDetay sepet: sepetList){
+//					UrunDB.updateStok(sepet.getUrunID(), sepet.getSepetAdet());
+//				}
+//				SepetUrunDetayDB.removeAllSepet();
+//			}
+//			else{
+//				System.out.println("Satin alma işlemi gerçekleştirilemedi!");
+//			}
+//		}
+//
+//	}
 	
-	private static boolean satinAl(String uuid, List<UrunSepetDetay> sepetList, User user, Double toplamSepetFiyat) {
-		int userID = user.getId();
-		for (UrunSepetDetay sepet: sepetList){
-			Satis satis = new Satis();
-			satis.setFaturaUUID(uuid);
-			satis.setSepetDetayList(sepet);
-			satis.setUser(userID);
-			satis.setToplamFiyat(toplamSepetFiyat);
-			SatisDB.addSatis(satis);
-		}
-		
-		return true;
-	}
+//	private static boolean satinAl(String uuid, List<UrunSepetDetay> sepetList, User user, Double toplamSepetFiyat) {
+//		int userID = user.getId();
+//		for (UrunSepetDetay sepet: sepetList){
+//			Satis satis = new Satis();
+//			satis.setFaturaUUID(uuid);
+//			satis.setSepetDetayList(sepet);
+//			satis.setUser(userID);
+//			satis.setToplamFiyat(toplamSepetFiyat);
+//			SatisDB.addSatis(satis);
+//		}
+//
+//		return true;
+//	}
 	
 	private static Urun urunSelectByID() {
 		int id;
@@ -278,14 +277,16 @@ public class TredyolApp {
 	
 	private static void sepeteEklenme(Urun urun) {
 		int userInput;
-		UrunSepetDetay sepetUrun;
+//		UrunSepetDetay sepetUrun;
 		System.out.println("0-Geri Dön");
 		System.out.println("1-Ürünü sepete ekle");
-		UrunSepetDetay sepet = new UrunSepetDetay();
 		System.out.print("Selection: ");
 		userInput = sc.nextInt();
 		System.out.println();
+		
 		if (userInput == 1) {
+			Sepet sepet = new Sepet();
+			Integer sepetID = SepetDB.SepetIDSetter();
 			int urunStokAdet = urun.getStokAdet();
 			System.out.println("Stok Adedi: " + urun.getStokAdet());
 			System.out.println();
@@ -301,71 +302,85 @@ public class TredyolApp {
 					System.out.println("\nFazla adet girişi yaptınız!\n");
 					continue;
 				}
-				sepetUrun = SepetUrunDetayDB.findBySepetUrunID(urun.getUrunID());
+				
 				Double fiyat = urun.getFiyat();
-				if (sepetUrun == null) {
-					sepet.setUrunID(urun.getUrunID());
-					sepet.setUrunAdi(urun.getUrunAdi());
+				if (cacheSepet.isEmpty()) {
+					//TODO: kullanıcı giriş yaptıysa kullanıcıyı aktar.
+					sepet.setUserID(-1);
+					sepet.setSepetID(sepetID);
+					sepet.setUrun(urun);
+					sepet.setUrunAdet(userInput);
 					sepet.setAdetFiyat(fiyat);
-					sepet.setSepetAdet(userInput);
-					sepet.setToplamFiyat(fiyat, userInput);
-					SepetUrunDetayDB.addSepet(sepet);
+					Double toplamUrunFiyat = fiyat*userInput;
+					sepet.setToplamUrunFiyat(toplamUrunFiyat);
+					cacheSepet.add(sepet);
 					return;
 				}
-				int toplamAdet = sepetUrun.getSepetAdet() + userInput;
-				if (toplamAdet > urunStokAdet) {
+				int istenenToplamAdet = getchaceSepettekiUrunAdet(urun.getUrunID(), userInput);
+				if (istenenToplamAdet > urunStokAdet) {
 					System.out.println("\nStokda yeteri kadar ürün yok.\n");
 					continue;
 				}
-				sepetUrun.setSepetAdet(toplamAdet);
-				sepet.setToplamFiyat(fiyat, userInput);
-				return;
-				
+//				sepetUrun.setSepetAdet(toplamAdet);
+//				sepet.setToplamFiyat(fiyat, userInput);
+//				return;
+
 			} while (userInput != 0);
 		}
 	}
 	
-	private static void sepettenUrunSil(int userRmSelection) {
-		System.out.println("---- Sepet İçeriği ------");
-		SepetUrunDetayDB.sepetListAll();
-		System.out.println();
-		int userInput;
-		boolean silindiMi = false;
-		
-		if (userRmSelection == 2) {
-			System.out.print("Eksiltmek istediğiniz ürünün ürünID: ");
-			userInput = sc.nextInt();
-			UrunSepetDetay sepetUrun = SepetUrunDetayDB.findBySepetUrunID(userInput);
-			if (sepetUrun == null) {
-				System.out.println("Sepette böyle bir ürün yok!");
-			}
-			else {
-				System.out.print("Eksitmek istediginiz miktar: ");
-				userInput = sc.nextInt();
-				silindiMi = SepetUrunDetayDB.sepettenUrunEksilt(sepetUrun, userInput);
+	private static int getchaceSepettekiUrunAdet(Integer urunID, int istenenAdet) {
+		int sepettekiUrunAdet = 0;
+		for (Sepet sepet: cacheSepet){
+			if (sepet.getUrun().getUrunID() == urunID){
+				sepettekiUrunAdet = sepet.getUrunAdet();
+				break;
 			}
 		}
-		else if (userRmSelection == 3) {
-			System.out.println("1-Bütün sepeti sil");
-			System.out.println("2-Bir ürün sil");
-			System.out.print("selection:");
-			userInput = sc.nextInt();
-			if (userInput == 1) {
-				SepetUrunDetayDB.removeAllSepet();
-				silindiMi = true;
-			}
-			else if (userInput == 2) {
-				System.out.print("Silmek istediğiniz sepet ID: ");
-				userInput = sc.nextInt();
-				silindiMi = SepetUrunDetayDB.removeSepetUrunBySepetDetayID(userInput);
-			}
-		}
-		if (silindiMi) {
-			System.out.println("silme işlemi gerçekleştirildi!");
-		}
-		else {
-			System.out.println("Sepette böyle bir ürün yok yada girdiğiniz adet miktarı fazla!");
-		}
+		return sepettekiUrunAdet*istenenAdet;
 	}
+
+//	private static void sepettenUrunSil(int userRmSelection) {
+//		System.out.println("---- Sepet İçeriği ------");
+//		SepetUrunDetayDB.sepetListAll();
+//		System.out.println();
+//		int userInput;
+//		boolean silindiMi = false;
+//
+//		if (userRmSelection == 2) {
+//			System.out.print("Eksiltmek istediğiniz ürünün ürünID: ");
+//			userInput = sc.nextInt();
+//			UrunSepetDetay sepetUrun = SepetUrunDetayDB.findBySepetUrunID(userInput);
+//			if (sepetUrun == null) {
+//				System.out.println("Sepette böyle bir ürün yok!");
+//			}
+//			else {
+//				System.out.print("Eksitmek istediginiz miktar: ");
+//				userInput = sc.nextInt();
+//				silindiMi = SepetUrunDetayDB.sepettenUrunEksilt(sepetUrun, userInput);
+//			}
+//		}
+//		else if (userRmSelection == 3) {
+//			System.out.println("1-Bütün sepeti sil");
+//			System.out.println("2-Bir ürün sil");
+//			System.out.print("selection:");
+//			userInput = sc.nextInt();
+//			if (userInput == 1) {
+//				SepetUrunDetayDB.removeAllSepet();
+//				silindiMi = true;
+//			}
+//			else if (userInput == 2) {
+//				System.out.print("Silmek istediğiniz sepet ID: ");
+//				userInput = sc.nextInt();
+//				silindiMi = SepetUrunDetayDB.removeSepetUrunBySepetDetayID(userInput);
+//			}
+//		}
+//		if (silindiMi) {
+//			System.out.println("silme işlemi gerçekleştirildi!");
+//		}
+//		else {
+//			System.out.println("Sepette böyle bir ürün yok yada girdiğiniz adet miktarı fazla!");
+//		}
+//	}
 	
 }
