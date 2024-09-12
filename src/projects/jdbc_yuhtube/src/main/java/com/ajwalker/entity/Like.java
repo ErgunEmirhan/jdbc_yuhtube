@@ -1,0 +1,50 @@
+package com.ajwalker.entity;
+
+public class Like extends BaseEntity {
+    private Long user_id;
+    private Long video_id;
+     // state field için -> L - > Like, D -> Dislike, N -> Non
+
+    public Like() {
+    }
+
+    public Like(Long user_id, Long video_id, char state) {
+        super.state = state;
+        this.user_id = user_id;
+        this.video_id = video_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
+
+    public Long getVideo_id() {
+        return video_id;
+    }
+
+    public void setVideo_id(Long video_id) {
+        this.video_id = video_id;
+    }
+
+    public char getState() {
+        return state;
+    }
+
+    public void setState(char state) {
+        super.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Like{" +
+                "id=" + id +
+                "user_id=" + user_id +
+                ", video_id=" + video_id +
+                ", state=" + state +
+                '}';
+    }
+}
