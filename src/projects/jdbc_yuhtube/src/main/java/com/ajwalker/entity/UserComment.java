@@ -1,24 +1,20 @@
 package com.ajwalker.entity;
 
-public class Comment extends BaseEntity {
+public class UserComment extends BaseEntity {
     private Long video_id;
     private Long user_id;
     private String comment;
 
-    {
-        this.state = '1';
+    public UserComment() {
     }
 
-    public Comment() {
-    }
-
-    public Comment(Long video_id, Long user_id, String comment) {
+    public UserComment(Long video_id, Long user_id, String comment) {
         this.video_id = video_id;
         this.user_id = user_id;
         this.comment = comment;
     }
 
-    public Comment(Long id, Long video_id, Long user_id, String comment) {
+    public UserComment(Long id, Long video_id, Long user_id, String comment) {
         super.id = id;
         this.video_id = video_id;
         this.user_id = user_id;
@@ -51,7 +47,7 @@ public class Comment extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "UserComment{" +
                 "id=" + getId() +
                 "video_id=" + video_id +
                 ", user_id=" + user_id +

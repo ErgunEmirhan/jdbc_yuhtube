@@ -3,13 +3,12 @@ package com.ajwalker.entity;
 public class Like extends BaseEntity {
     private Long user_id;
     private Long video_id;
-     // state field için -> L - > Like, D -> Dislike, N -> Non
+     // state field için -> 1 - > Like, 2 -> Dislike, 0 -> Non
 
     public Like() {
     }
 
     public Like(Long user_id, Long video_id, char state) {
-        super.state = state;
         this.user_id = user_id;
         this.video_id = video_id;
     }
@@ -28,14 +27,6 @@ public class Like extends BaseEntity {
 
     public void setVideo_id(Long video_id) {
         this.video_id = video_id;
-    }
-
-    public char getState() {
-        return state;
-    }
-
-    public void setState(char state) {
-        super.state = state;
     }
 
     @Override

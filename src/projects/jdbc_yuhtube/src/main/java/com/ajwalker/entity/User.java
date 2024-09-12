@@ -5,10 +5,6 @@ public class User extends BaseEntity {
     private String email;
     private String password;
 
-    {
-        this.state = '1';
-    }
-
     public User() {
     }
 
@@ -19,7 +15,7 @@ public class User extends BaseEntity {
     }
 
     public User(Long id, String username, String email, String password) {
-        super.id = id;
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -49,13 +45,15 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
-                "id= "+ getId() +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", state=" + state +
                 '}';
     }
 }

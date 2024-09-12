@@ -2,13 +2,18 @@ package com.ajwalker.entity;
 
 public class BaseEntity {
     protected Long id;
-    protected char state;
+    protected Integer state;
 
 
     public BaseEntity() {
     }
 
-    public BaseEntity(char state) {
+    public BaseEntity(Integer state) {
+        this.state = state;
+    }
+
+    public BaseEntity(Long id, Integer state) {
+        this.id = id;
         this.state = state;
     }
 
@@ -20,11 +25,11 @@ public class BaseEntity {
         this.id = id;
     }
 
-    public char getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(char state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

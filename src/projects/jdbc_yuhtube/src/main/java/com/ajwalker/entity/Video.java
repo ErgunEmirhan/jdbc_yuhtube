@@ -6,10 +6,6 @@ public class Video extends BaseEntity {
     private String content;
     private String description;
 
-    {
-        this.state = '1';
-    }
-
     public Video() {
     }
 

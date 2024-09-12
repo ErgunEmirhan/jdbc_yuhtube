@@ -125,7 +125,8 @@ public class SQLQueryBuilder {
                             // Boolean türü için kontrol
                             else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
                                 field.set(entity, value);
-                            } else {
+                            }
+                            else {
                                 field.set(entity, value);
                             }
                         }
@@ -178,11 +179,14 @@ public class SQLQueryBuilder {
                             else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
                                 field.set(entity, value);
                             }
-
+                            else if (field.getType().equals(Character.class) && value instanceof String){
+                                field.set(entity, ((String) value).charAt(0));
+                            }
                             // Diğer türler için
                             else {
-                                field.set(entity, value);
+                                field.set(entity, field.getType().cast(value));
                             }
+
                         }
                     }
                     currentClass = currentClass.getSuperclass();
