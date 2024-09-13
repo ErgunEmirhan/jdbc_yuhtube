@@ -42,6 +42,18 @@ public class UserRepository implements ICRUD<User> {
         return databaseHelper.executeUpdate(generateDelete(TABLE_NAME, id));
     }
 
+    public boolean softDelete (Long id){
+        Optional<User> userOptional = findById(id);
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            System.out.println(user.getId());
+            user.setState(0);
+            return update(user);
+        }
+        else
+            return false;
+    }
+
     @Override
     public List<User> findAll() {
         String sql = "SELECT * FROM " + TABLE_NAME +" ORDER BY id DESC";

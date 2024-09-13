@@ -41,51 +41,58 @@ public class SQLQueryBuilder {
                 }
             }
         }
-        return "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ")";
+        String sql = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values + ")";
+        System.out.println("Generated SQL: " + sql); // Debugging: print the generated SQL
+        return sql;
     }
 
     public static String generateUpdate(Object entity, String tableName) {
         Class<?> clazz = entity.getClass();
-        Field[] fields = clazz.getDeclaredFields();
         StringBuilder setClause = new StringBuilder();
         Object idValue = null;
 
-        for (Field field : fields) {
-            field.setAccessible(true);
-            if (field.getName().equalsIgnoreCase("id")) {
-                try {
-                    idValue = field.get(entity);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            } else {
+        // Traverse through the class hierarchy
+        while (clazz != null) {
+            Field[] fields = clazz.getDeclaredFields(); // Get fields of current class
+            for (Field field : fields) {
+                field.setAccessible(true); // Allow access to private/protected fields
                 try {
                     Object value = field.get(entity);
-                    if (setClause.length() > 0) setClause.append(", ");
-                    setClause.append(field.getName()).append("=");
-                    if (value == null) {
-                        setClause.append("NULL");
-                    } else if (value instanceof String || value instanceof Date || value instanceof LocalDate || value instanceof Timestamp) {
-                        setClause.append("'").append(value).append("'");
+                    if (field.getName().equalsIgnoreCase("id")) {
+                        idValue = value; // Capture 'id' value
                     } else {
-                        setClause.append(value);
+                        if (setClause.length() > 0) setClause.append(", ");
+                        setClause.append(field.getName()).append("=");
+                        if (value == null) {
+                            setClause.append("NULL");
+                        } else if (value instanceof String || value instanceof Date || value instanceof LocalDate || value instanceof Timestamp) {
+                            setClause.append("'").append(value).append("'"); // Quote string-like values
+                        } else {
+                            setClause.append(value); // Directly append numbers
+                        }
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
+            clazz = clazz.getSuperclass(); // Move to parent class
         }
 
         if (idValue == null) {
             throw new IllegalArgumentException("ID yok.");
         }
 
-        return "UPDATE " + tableName + " SET " + setClause + " WHERE id=" + idValue;
+        // Final SQL
+        String sql = "UPDATE " + tableName + " SET " + setClause + " WHERE id=" + idValue;
+        System.out.println("Generated SQL: " + sql); // Debugging: print the generated SQL
+        return sql;
     }
+
 
     public static String generateDelete(String tableName, Object id) {
         String idColumnName = "id";
         String sql = "DELETE FROM " + tableName + " WHERE " + idColumnName + " = '" + id + "'";
+        System.out.println("Generated SQL: " + sql); // Debugging: print the generated SQL
         return sql;
     }
 
@@ -125,8 +132,7 @@ public class SQLQueryBuilder {
                             // Boolean türü için kontrol
                             else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
                                 field.set(entity, value);
-                            }
-                            else {
+                            } else {
                                 field.set(entity, value);
                             }
                         }
@@ -178,8 +184,7 @@ public class SQLQueryBuilder {
                             // Boolean türü için kontrol
                             else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
                                 field.set(entity, value);
-                            }
-                            else if (field.getType().equals(Character.class) && value instanceof String){
+                            } else if (field.getType().equals(Character.class) && value instanceof String) {
                                 field.set(entity, ((String) value).charAt(0));
                             }
                             // Diğer türler için
