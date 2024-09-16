@@ -3,6 +3,7 @@ package com.ajwalker.service;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
+import com.ajwalker.model.VideoModel;
 import com.ajwalker.repository.VideoRepository;
 
 import java.util.List;
@@ -69,5 +70,19 @@ public class VideoService {
     public List<DtoVideoThumbnail> showMyVideos(User user) {
         List<Video> videos = videoRepository.findByCreatorId(user);
         return videoToDto(videos);
+    }
+	
+	public VideoModel generateVideoModel(Video video) {
+        Long likeCount = LikeService.getInstance().countLikes(video.getId());
+        Long dislikeCount = LikeService.getInstance().countDislikes(video.getId());
+        Long commentCount = CommentService.getInstance().countComment(video.getId());
+        
+        return new VideoModel(video, likeCount, dislikeCount, commentCount);
+        
+	}
+    
+    public void watched(Video video) {
+        video.setViewCount(video.getViewCount() + 1);
+        update(video);
     }
 }

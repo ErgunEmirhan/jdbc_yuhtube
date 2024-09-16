@@ -3,6 +3,7 @@ package com.ajwalker.controller;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
+import com.ajwalker.model.VideoModel;
 import com.ajwalker.service.VideoService;
 
 import java.util.ArrayList;
@@ -71,6 +72,24 @@ public class VideoController {
         catch (Exception e) {
             System.out.println("Could not show your videos(controller)..." + e.getMessage());
             return new ArrayList<>();
+        }
+    }
+    
+    public VideoModel generateVideoModel(Video video) {
+        try{
+            return videoService.generateVideoModel(video);
+        }
+        catch (Exception e) {
+            System.out.println("could not generate video model(controller)..." + e.getMessage());
+        }
+       return null;
+    }
+    
+    public void watched(Video video) {
+        try{
+            videoService.watched(video);
+        }catch (Exception e){
+            System.out.println("could not watch video(controller)..." + e.getMessage());
         }
     }
 }

@@ -58,4 +58,37 @@ public class LikeService {
     public Optional<Like> findByVideoAndUser(Video video, User user) {
         return likeRepository.findByVideoAndUserId(video.getId(), user.getId());
     }
+    
+    public void dislikeTheVideo(Video video, User user) {
+        Optional<Like> optLike = findByVideoAndUser(video, user);
+        if (optLike.isPresent()) {
+            Like like = optLike.get();
+            like.setState(-1);
+            update(like);
+        }
+        else {
+            save(new Like(user.getId(), video.getId(), -1));
+        }
+    }
+    
+    public void softDeleteLike(Video video, User user) {
+        Optional<Like> optLike = findByVideoAndUser(video, user);
+        if (optLike.isPresent()) {
+            Like like = optLike.get();
+            like.setState(0);
+            update(like);
+        }
+        else {
+            System.out.println("Take back what?");
+        }
+    }
+    
+    public Long countLikes(Long videoId) {
+        return likeRepository.findByVideoId(videoId).stream().filter(like -> like.getState() == 1).count();
+    }
+    
+    public Long countDislikes(Long videoId) {
+        return likeRepository.findByVideoId(videoId).stream().filter(like -> like.getState() == -1).count();
+    }
+    
 }

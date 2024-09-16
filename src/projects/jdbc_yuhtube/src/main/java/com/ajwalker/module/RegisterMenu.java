@@ -6,6 +6,7 @@ import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class RegisterMenu {
@@ -17,9 +18,9 @@ public class RegisterMenu {
 		String username = createUsername();
 		String password = createPassword();
 		User user = new User(username, email, password);
-		userController.save(user);
-		System.out.println("Successfulled");
-		
+		if (userController.save(user)) {
+			System.out.println("Successfulled");
+		}
 	}
 	private String createEmail(){
 		while (true){
@@ -33,7 +34,8 @@ public class RegisterMenu {
 	}
 	
 	private String createPassword() {
-		while (true){
+		int i = 0;
+		while (i < 3){
 			System.out.print("Enter your password: ");
 			String password = scanner.nextLine();
 			System.out.print("Enter your password again: ");
@@ -43,7 +45,9 @@ public class RegisterMenu {
 				else System.out.println("Password does not satisfy the restrictions");
 			}
 			else System.out.println("Password does not match");
+			i++;
 		}
+		return null;
 	}
 	
 	private boolean isValidPassword(String password) {

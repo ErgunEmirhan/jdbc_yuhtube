@@ -5,7 +5,16 @@ public class Video extends BaseEntity {
     private String title;
     private String content;
     private String description;
-
+    private Integer viewCount;
+    
+    public Integer getViewCount() {
+        return viewCount;
+    }
+    
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
+    
     public Video() {
     }
 

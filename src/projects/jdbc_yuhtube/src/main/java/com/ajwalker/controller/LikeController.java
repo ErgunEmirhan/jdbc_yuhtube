@@ -43,8 +43,30 @@ public class LikeController {
     }
     
     public void likeTheVideo(Video video, User user) {
-        likeService.likeTheVideo(video, user);
+	    try {
+		    likeService.likeTheVideo(video, user);
+	    }
+	    catch (Exception e) {
+            System.out.println("could not like the video(controller)..." + e.getMessage());
+	    }
     }
     
     
+    public void dislikeTheVideo(Video video, User user) {
+        try {
+            likeService.dislikeTheVideo(video, user);
+        }
+        catch (Exception e) {
+            System.out.println("could not like the video(controller)..." + e.getMessage());
+        }
+    }
+    
+    public void softDeleteLike(Video video, User user) {
+        try {
+            likeService.softDeleteLike(video, user);
+        }
+        catch (Exception e) {
+            System.out.println("could not like the video(controller)..." + e.getMessage());
+        }
+    }
 }

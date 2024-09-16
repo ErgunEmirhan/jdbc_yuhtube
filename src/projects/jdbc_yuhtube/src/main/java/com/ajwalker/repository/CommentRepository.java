@@ -1,6 +1,7 @@
 package com.ajwalker.repository;
 
 import com.ajwalker.database.DatabaseHelper;
+import com.ajwalker.entity.Like;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.UserComment;
 import com.ajwalker.utility.ICRUD;
@@ -59,4 +60,12 @@ public class CommentRepository implements ICRUD<UserComment> {
         }
         return Optional.empty();
     }
+	
+	public List<UserComment> countComment(Long videoId) {
+        String sql = "SELECT * FROM " + TABLE_NAME +" WHERE video_id = "+ videoId +" ORDER" +
+                " BY" +
+                " id DESC";
+        Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
+        return resultSet.map(set -> generateList(UserComment.class, set)).orElseGet(ArrayList::new);
+	}
 }

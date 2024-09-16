@@ -4,6 +4,7 @@ import com.ajwalker.controller.VideoController;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
+import com.ajwalker.model.VideoModel;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -84,7 +85,9 @@ public class VideoModule {
 					return;
 				}
 				Video video = optVideo.get();
-				new WatchModule().watchMenu(video, user);
+				VideoModel videoModel= videoController.generateVideoModel(video);
+				new WatchModule().watchMenu(videoModel, user);
+				opt = 0;
 			}
 			catch (Exception e) {
 				System.out.println("No such video (controller chosevideotowatch)..." + e.getMessage());

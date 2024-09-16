@@ -1,6 +1,8 @@
 package com.ajwalker.controller;
 
+import com.ajwalker.entity.User;
 import com.ajwalker.entity.UserComment;
+import com.ajwalker.entity.Video;
 import com.ajwalker.service.CommentService;
 
 import java.util.List;
@@ -38,4 +40,13 @@ public class CommentController {
     public Optional<UserComment> findById(Long id) {
         return commentService.findById(id);
     }
+	
+	public void comment(Video video, User user, String comment) {
+		try {
+			commentService.comment(video, user, comment);
+		}
+		catch (Exception e) {
+            System.out.println("cannot comment(controller)... " + e.getMessage());
+		}
+	}
 }
