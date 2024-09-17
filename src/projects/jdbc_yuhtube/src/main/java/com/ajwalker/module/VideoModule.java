@@ -1,27 +1,30 @@
 package com.ajwalker.module;
 
 import com.ajwalker.controller.VideoController;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
-import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
+import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.model.VideoModel;
+import com.sun.tools.javac.Main;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static com.ajwalker.module.MainMenu.choice;
-
 public class VideoModule {
-	private Optional<User> user;
+	private Optional<String> token;
 	private Scanner scanner = new Scanner(System.in);
 	private VideoController videoController = VideoController.getInstance();
 	private List<DtoVideoThumbnail> videosToWatch = new ArrayList<DtoVideoThumbnail>();
 	
-	public Optional<User> videoModule(Optional<User> user) {
-		this.user = user;
+	private Integer choice(){ //TODO alt katmandan üst katmana ilerleme, yeni bir sınıf aç choice'ı oraya koy
+		return MainMenu.getInstance().choice();
+	}
+	
+	public Optional<String> videoModule(Optional<String> token) {
+		this.token = token;
 		int opt;
 		do{
 			System.out.println("""
@@ -37,7 +40,7 @@ public class VideoModule {
 					                   """);
 			opt = mainMenuOptions(choice());
 		}while(opt != 0);
-		return user;
+		return token;
 	}
 	
 	private int mainMenuOptions(int choice) {
@@ -49,15 +52,15 @@ public class VideoModule {
 				videosToWatch = filterByTitle();
 				break;
 			case 3:
-				if (user.isEmpty()){
+				if (token.isEmpty()){
 					System.out.println("You must log in to see your videos");
-					user = new LoginMenu().loginModule();
-					if(user.isEmpty()){
+					token = MainMenu.getInstance().login();
+					if(token.isEmpty()){
 						System.out.println("Cannot see your videos since you have not logged in");
 						break;
 					}
 				}
-				videosToWatch = showMyVideos(user.get());
+				videosToWatch = showMyVideos(token);
 				break;
 				case 4:
 					// show what's trending
@@ -85,8 +88,9 @@ public class VideoModule {
 					return;
 				}
 				Video video = optVideo.get();
-				VideoModel videoModel= videoController.generateVideoModel(video);
-				new WatchModule().watchMenu(videoModel, user);
+				DtoVideoDetailed dtoVideoDetailed= videoController.generateVideoModel(video);
+				VideoModel videoModel = new VideoModel(dtoVideoDetailed);
+				new WatchModule().watchMenu(videoModel, token);
 				opt = 0;
 			}
 			catch (Exception e) {
@@ -96,7 +100,8 @@ public class VideoModule {
 		}while(opt != 0);
 	}
 	
-	private List<DtoVideoThumbnail> showMyVideos(User user) {
+	private List<DtoVideoThumbnail> showMyVideos(Optional<> user) {
+		
 		List<DtoVideoThumbnail> videos = videoController.showMyVideos(user);
 		printVideos(videos);
 		return videos;

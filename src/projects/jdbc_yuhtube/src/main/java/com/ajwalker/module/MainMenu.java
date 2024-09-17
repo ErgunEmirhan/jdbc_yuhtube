@@ -1,19 +1,24 @@
 package com.ajwalker.module;
 
-import com.ajwalker.entity.User;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 
 import java.util.Optional;
 import java.util.Scanner;
 
 public class MainMenu {
-	private static Optional<User> user = Optional.empty();
-	private static LoginMenu loginMenu = new LoginMenu();
-	private static Scanner scanner = new Scanner(System.in);
+	private MainMenu() {}
+	private static MainMenu instance = new MainMenu();
+	public static MainMenu getInstance() {
+		return instance;
+	}
+	private  Optional<String> token;
+	private  LoginMenu loginMenu = new LoginMenu();
+	private  Scanner scanner = new Scanner(System.in);
 	
-	public static void mainMenu(){
+	public  void mainMenu(){
 		int opt;
 		do{
-			if (user.isEmpty()) opt = anonymousMainMenu();
+			if (token.isEmpty()) opt = anonymousMainMenu();
 			else opt = userMainMenu();
 		} while(opt != 0);
 		System.out.println(opt);
@@ -31,16 +36,16 @@ public class MainMenu {
 		return mainMenuOptions(choice());
 	}
 	
-	private static int mainMenuOptions(int choice) {
+	private int mainMenuOptions(int choice) {
 		switch (choice){
 			case 1:
-				user = new LoginMenu().loginModule();
+				login();
 				break;
 			case 2:
 				new RegisterMenu().register();
 				break;
 			case 3:
-				user = new VideoModule().videoModule(user);
+				token = new VideoModule().videoModule(token);
 				break;
 			case 0:
 				System.out.println("Have a nice day!");
@@ -52,7 +57,13 @@ public class MainMenu {
 		return choice;
 	}
 	
-	public static int choice() {
+	public Optional<String> login() {
+		Optional<DtoUserLoginResponse> tempResponse = new LoginMenu().loginModule();
+		tempResponse.ifPresent(this::loginRequestToToken);
+		return token;
+	}
+	
+	public int choice() {
 		while (true) {
 			try {
 				System.out.print("Enter int value> ");
@@ -67,7 +78,7 @@ public class MainMenu {
 		}
 	}
 	
-	private static int userMainMenu() {
+	private int userMainMenu() {
 		System.out.println("""
 				                   YuhTube
 				                   Main Menu
@@ -79,13 +90,13 @@ public class MainMenu {
 		return userMainMenuOptions(choice());
 	}
 	
-	private static int userMainMenuOptions(int choice) {
+	private int userMainMenuOptions(int choice) {
 		switch (choice){
 			case 1:
-				user = Optional.empty();
+				token = Optional.empty();
 				break;
 			case 2:
-				user = (new VideoModule()).videoModule(user);
+				token = (new VideoModule()).videoModule(token);
 				break;
 			case 0:
 				System.out.println("Have a nice day!");
@@ -97,4 +108,7 @@ public class MainMenu {
 		return choice;
 	}
 	
+	public void loginRequestToToken(DtoUserLoginResponse loginResponse) {
+		token = Optional.ofNullable(loginResponse.getUsername());
+	}
 }

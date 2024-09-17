@@ -1,26 +1,24 @@
 package com.ajwalker.model;
 
-import com.ajwalker.entity.Video;
+import com.ajwalker.dto.response.DtoVideoDetailed;
+
+
 
 public class VideoModel {
-	private Video video;
-	private Long likeCount;
-	private Long dislikeCount;
-	private Long commentCount;
+	private DtoVideoDetailed dtoVideoDetailed;
 	
-	
-	public VideoModel(Video video, Long likeCount, Long dislikeCount, Long commentCount) {
-		this.video = video;
-		this.likeCount = likeCount;
-		this.dislikeCount = dislikeCount;
-		this.commentCount = commentCount;
+	public VideoModel(DtoVideoDetailed dtoVideoDetailed) { //
+		this.dtoVideoDetailed = dtoVideoDetailed;
 	}
 	
-	public void showStatistics(){
-		System.out.println("likeCount: " + likeCount + " dislikeCount: " + dislikeCount + " commentCount: " + commentCount + "viewCount: " + video.getViewCount());
+	public void videoStatistics(){
+		System.out.println("### Video Statistics ###");
+		System.out.println("likes: " + dtoVideoDetailed.getLikeCount());
+		System.out.println("dislikes: " + dtoVideoDetailed.getDislikeCount());
+		System.out.println("comments: " + dtoVideoDetailed.getCommentCount());
+		System.out.println("view count: " + dtoVideoDetailed.getVideo().getViewCount());
 	}
-	
-	public Video getVideo() {
-		return video;
+	public DtoVideoDetailed getDtoVideoDetailed() {
+		return dtoVideoDetailed;
 	}
 }

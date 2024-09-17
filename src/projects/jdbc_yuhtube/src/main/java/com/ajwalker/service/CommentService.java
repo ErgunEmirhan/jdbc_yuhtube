@@ -46,7 +46,6 @@ public class CommentService {
     
     public void comment(Video video, User user, String comment) {
         UserComment userComment = new UserComment(video.getId(), user.getId(), comment);
-        System.out.println(user.getId());
         save(userComment);
     }
     

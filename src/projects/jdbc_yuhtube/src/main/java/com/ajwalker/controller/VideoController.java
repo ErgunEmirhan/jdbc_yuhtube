@@ -1,9 +1,10 @@
 package com.ajwalker.controller;
 
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
-import com.ajwalker.model.VideoModel;
+import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.service.VideoService;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class VideoController {
     }
     
     
-    public List<DtoVideoThumbnail> showMyVideos(User user) {
+    public List<DtoVideoThumbnail> showMyVideos(DtoUserLoginResponse user) {
         try{
             return videoService.showMyVideos(user);
         }
@@ -75,7 +76,7 @@ public class VideoController {
         }
     }
     
-    public VideoModel generateVideoModel(Video video) {
+    public DtoVideoDetailed generateVideoModel(Video video) {
         try{
             return videoService.generateVideoModel(video);
         }

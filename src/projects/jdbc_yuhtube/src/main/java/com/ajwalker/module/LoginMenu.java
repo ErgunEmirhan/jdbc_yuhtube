@@ -3,6 +3,8 @@ package com.ajwalker.module;
 
 
 import com.ajwalker.controller.UserController;
+import com.ajwalker.dto.request.DtoUserLoginRequest;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
 
@@ -13,33 +15,19 @@ public class LoginMenu {
 	private Scanner scanner = new Scanner(System.in);
 	private UserController userController = UserController.getInstance();
 	
-	public Optional<User> loginModule(){
+	public Optional<DtoUserLoginResponse> loginModule(){
 		return loginMenu();
 	}
 	
-	private Optional<User> loginMenu() {
+	
+	
+	private Optional<DtoUserLoginResponse> loginMenu(){
 		System.out.print("Enter your username: ");
 		String username = scanner.nextLine();
-		Optional<User> user = userController.findByUsername(username);
-		if(user.isEmpty()){
-			System.out.println("Invalid username!");
-			return Optional.empty();
-		}
 		System.out.print("Enter your password: ");
 		String password = scanner.nextLine();
-		if (checkUser(password, user)){
-			//TODO: başka bir menüye aktarılsın!
-			System.out.println("Login successful!");
-			return user;
-		}
-		else{
-			System.out.println("Incorrect username or password!");
-			return Optional.empty();
-		}
-	}
-	
-	private boolean checkUser(String password, Optional<User> user) {
-		return user.get().getPassword().equals(password);
+		DtoUserLoginRequest tempLoginRequest = new DtoUserLoginRequest(username, password);
+		return userController.login(tempLoginRequest);
 	}
 	
 	private Optional<String> findByUsername() {

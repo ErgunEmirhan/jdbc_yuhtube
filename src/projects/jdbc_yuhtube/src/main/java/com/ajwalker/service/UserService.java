@@ -2,6 +2,8 @@ package com.ajwalker.service;
 
 import com.ajwalker.database.DatabaseHelper;
 import com.ajwalker.database.SQLQueryBuilder;
+import com.ajwalker.dto.request.DtoUserLoginRequest;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
 import com.ajwalker.utility.ICRUD;
@@ -53,5 +55,20 @@ public class UserService {
             return SQLQueryBuilder.findBy(User.class, resultSet.get());
         }
         else return Optional.empty();
+    }
+    
+    public Optional<DtoUserLoginResponse> login(DtoUserLoginRequest tempLoginRequest) {
+        Optional<User> optUser = findByUsername(tempLoginRequest.getUsername());
+        if(optUser.isEmpty()){
+            System.out.println("No such username exists...(service)");
+            return Optional.empty();
+        }
+        boolean isCorrectPassword = optUser.get().getPassword().equals(tempLoginRequest.getPassword());
+        if(!isCorrectPassword){
+            System.out.println("Incorrect password...(service)");
+            return Optional.empty();
+        }
+        String finalUsername = optUser.get().getUsername();
+        return Optional.ofNullable(new DtoUserLoginResponse(finalUsername));
     }
 }

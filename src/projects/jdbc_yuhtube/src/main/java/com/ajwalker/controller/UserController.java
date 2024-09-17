@@ -1,5 +1,7 @@
 package com.ajwalker.controller;
 
+import com.ajwalker.dto.request.DtoUserLoginRequest;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
 import com.ajwalker.service.UserService;
@@ -79,6 +81,15 @@ public class UserController {
         System.out.println("failed(controller level)..." + e.getMessage());
             return Optional.empty();
             
+        }
+    }
+    
+    public Optional<DtoUserLoginResponse> login(DtoUserLoginRequest tempLoginRequest) {
+        try{
+            return userService.login(tempLoginRequest);
+        }
+        catch (Exception e) {
+            System.out.println("Failed login(controller)..." + e.getMessage());
         }
     }
 }

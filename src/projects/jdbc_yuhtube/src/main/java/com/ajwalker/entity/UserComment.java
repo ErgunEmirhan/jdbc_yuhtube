@@ -12,6 +12,7 @@ public class UserComment extends BaseEntity {
         this.video_id = video_id;
         this.user_id = user_id;
         this.comment = comment;
+        this.state = 1;
     }
 
     public UserComment(Long id, Long video_id, Long user_id, String comment) {

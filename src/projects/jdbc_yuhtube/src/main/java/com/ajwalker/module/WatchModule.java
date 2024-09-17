@@ -3,9 +3,10 @@ package com.ajwalker.module;
 import com.ajwalker.controller.CommentController;
 import com.ajwalker.controller.LikeController;
 import com.ajwalker.controller.VideoController;
-import com.ajwalker.entity.Like;
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
+import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.model.VideoModel;
 
 import java.util.Optional;
@@ -21,7 +22,7 @@ public class WatchModule {
 	private VideoController videoController = VideoController.getInstance();
 	private Video video;
 	
-	private Optional<User> user;
+	private Optional<DtoUserLoginResponse> user;
 	Thread watchThread = new Thread(new Runnable() {
 		@Override
 		public void run() {
@@ -39,10 +40,10 @@ public class WatchModule {
 		watchThread.setDaemon(true);
 	}
 	
-	public void watchMenu(VideoModel videoModel, Optional<User> user) {
+	public void watchMenu(VideoModel videoModel, Optional<DtoUserLoginResponse> user) {
 		watchThread.start();
 		this.videoModel = videoModel;
-		this.video = videoModel.getVideo();
+		this.video = videoModel.getDtoVideoDetailed().getVideo();
 		this.user = user;
 		int opt;
 		do {
@@ -102,7 +103,7 @@ public class WatchModule {
 			case 8:
 				break;
 			case 9:
-				videoModel.showStatistics();
+				videoModel.videoStatistics();
 				break;
 			case 0:
 				System.out.println("Going back...");

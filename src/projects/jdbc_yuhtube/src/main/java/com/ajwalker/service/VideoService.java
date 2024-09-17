@@ -1,14 +1,14 @@
 package com.ajwalker.service;
 
+import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.dto.response.DtoVideoThumbnail;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
-import com.ajwalker.model.VideoModel;
+import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.repository.VideoRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class VideoService {
     private final static VideoRepository videoRepository = VideoRepository.getInstance();
@@ -67,17 +67,17 @@ public class VideoService {
                 }).toList();
     }
     
-    public List<DtoVideoThumbnail> showMyVideos(User user) {
+    public List<DtoVideoThumbnail> showMyVideos(DtoUserLoginResponse user) {
         List<Video> videos = videoRepository.findByCreatorId(user);
         return videoToDto(videos);
     }
 	
-	public VideoModel generateVideoModel(Video video) {
+	public DtoVideoDetailed generateVideoModel(Video video) {
         Long likeCount = LikeService.getInstance().countLikes(video.getId());
         Long dislikeCount = LikeService.getInstance().countDislikes(video.getId());
         Long commentCount = CommentService.getInstance().countComment(video.getId());
         
-        return new VideoModel(video, likeCount, dislikeCount, commentCount);
+        return new DtoVideoDetailed(video, likeCount, dislikeCount, commentCount);
         
 	}
     
