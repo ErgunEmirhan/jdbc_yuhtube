@@ -4,10 +4,8 @@ package com.ajwalker.module;
 import com.ajwalker.controller.UserController;
 import com.ajwalker.dto.request.DtoUserRegisterRequest;
 import com.ajwalker.entity.User;
-import com.ajwalker.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class RegisterMenu {

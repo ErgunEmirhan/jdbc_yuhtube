@@ -1,6 +1,7 @@
 package com.ajwalker.service;
 
 import com.ajwalker.database.DatabaseHelper;
+import com.ajwalker.dto.request.DtoLikeRequest;
 import com.ajwalker.entity.Like;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
@@ -43,43 +44,52 @@ public class LikeService {
         return likeRepository.findById(id);
     }
     
-    public void likeTheVideo(Video video, User user) {
-        Optional<Like> optLike = findByVideoAndUser(video, user);
+    public void likeTheVideo(DtoLikeRequest likeRequest) {
+        Long videoId = likeRequest.getVideoId();
+        Optional<User> optUser = UserService.getInstance().getUserIdByToken(likeRequest.getToken());
+        if (optUser.isEmpty()) throw new RuntimeException("Invalid token...(service)");
+        Long userId = optUser.get().getId();
+        Optional<Like> optLike = findByVideoAndUser(videoId, userId);
         if (optLike.isPresent()) {
             Like like = optLike.get();
             like.setState(1);
             update(like);
         }
         else {
-            save(new Like(user.getId(), video.getId(), 1));
+            save(new Like(userId, videoId, 1));
         }
     }
     
-    public Optional<Like> findByVideoAndUser(Video video, User user) {
-        return likeRepository.findByVideoAndUserId(video.getId(), user.getId());
+    public Optional<Like> findByVideoAndUser(Long videoId, Long userId) {
+        return likeRepository.findByVideoAndUserId(videoId, userId);
     }
     
-    public void dislikeTheVideo(Video video, User user) {
-        Optional<Like> optLike = findByVideoAndUser(video, user);
+    public void dislikeTheVideo(DtoLikeRequest likeRequest) {
+        Long videoId = likeRequest.getVideoId();
+        Optional<User> optUser = UserService.getInstance().getUserIdByToken(likeRequest.getToken());
+        if (optUser.isEmpty()) throw new RuntimeException("Invalid token...(service)");
+        Long userId = optUser.get().getId();
+        Optional<Like> optLike = findByVideoAndUser(videoId, userId);
         if (optLike.isPresent()) {
             Like like = optLike.get();
             like.setState(-1);
             update(like);
         }
         else {
-            save(new Like(user.getId(), video.getId(), -1));
+            save(new Like(userId, videoId, -1));
         }
     }
     
-    public void softDeleteLike(Video video, User user) {
-        Optional<Like> optLike = findByVideoAndUser(video, user);
+    public void softDeleteLike(DtoLikeRequest likeRequest) {
+        Long videoId = likeRequest.getVideoId();
+        Optional<User> optUser = UserService.getInstance().getUserIdByToken(likeRequest.getToken());
+        if (optUser.isEmpty()) throw new RuntimeException("Invalid token...(service)");
+        Long userId = optUser.get().getId();
+        Optional<Like> optLike = findByVideoAndUser(videoId, userId);
         if (optLike.isPresent()) {
             Like like = optLike.get();
             like.setState(0);
             update(like);
-        }
-        else {
-            System.out.println("Take back what?");
         }
     }
     

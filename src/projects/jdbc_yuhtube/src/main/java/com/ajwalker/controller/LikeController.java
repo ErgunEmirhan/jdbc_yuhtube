@@ -1,5 +1,6 @@
 package com.ajwalker.controller;
 
+import com.ajwalker.dto.request.DtoLikeRequest;
 import com.ajwalker.entity.Like;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
@@ -42,9 +43,9 @@ public class LikeController {
         return likeService.findById(id);
     }
     
-    public void likeTheVideo(Video video, User user) {
+    public void likeTheVideo(DtoLikeRequest likeRequest) {
 	    try {
-		    likeService.likeTheVideo(video, user);
+		    likeService.likeTheVideo(likeRequest);
 	    }
 	    catch (Exception e) {
             System.out.println("could not like the video(controller)..." + e.getMessage());
@@ -52,18 +53,18 @@ public class LikeController {
     }
     
     
-    public void dislikeTheVideo(Video video, User user) {
+    public void dislikeTheVideo(DtoLikeRequest likeRequest) {
         try {
-            likeService.dislikeTheVideo(video, user);
+            likeService.dislikeTheVideo(likeRequest);
         }
         catch (Exception e) {
             System.out.println("could not like the video(controller)..." + e.getMessage());
         }
     }
     
-    public void softDeleteLike(Video video, User user) {
+    public void softDeleteLike(DtoLikeRequest likeRequest) {
         try {
-            likeService.softDeleteLike(video, user);
+            likeService.softDeleteLike(likeRequest);
         }
         catch (Exception e) {
             System.out.println("could not like the video(controller)..." + e.getMessage());

@@ -3,10 +3,8 @@ package com.ajwalker.module;
 import com.ajwalker.controller.CommentController;
 import com.ajwalker.controller.LikeController;
 import com.ajwalker.controller.VideoController;
-import com.ajwalker.dto.response.DtoUserLoginResponse;
-import com.ajwalker.entity.User;
+import com.ajwalker.dto.request.DtoLikeRequest;
 import com.ajwalker.entity.Video;
-import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.model.VideoModel;
 
 import java.util.Optional;
@@ -20,7 +18,7 @@ public class WatchModule {
 	private CommentController commentController = CommentController.getInstance();
 	private VideoController videoController = VideoController.getInstance();
 	private Video video;
-	private Optional<String> user;
+	private Optional<String> token;
 	
 	Thread watchThread = new Thread(new Runnable() {
 		@Override
@@ -43,7 +41,7 @@ public class WatchModule {
 		watchThread.start();
 		this.videoModel = videoModel;
 		this.video = videoModel.getDtoVideoDetailed().getVideo();
-		this.user = token;
+		this.token = token;
 		int opt;
 		do {
 			System.out.printf("### %s ###\n", video.getTitle()); // videonun kaç like ve dislike'ı var
@@ -74,29 +72,32 @@ public class WatchModule {
 				System.out.println(video.getDescription());
 				break;
 			case 3:
-				user = isLoggedIn(user);
-				if (user.isPresent()) {
-					likeController.likeTheVideo(video, user.get());
+				token = isLoggedIn();
+				if (token.isPresent()) {
+					var likeRequest = new DtoLikeRequest(video.getId(), token.get());
+					likeController.likeTheVideo(likeRequest);
 				}
 				break;
 			case 4:
-				user = isLoggedIn(user);
-				if (user.isPresent()) {
+				token = isLoggedIn();
+				if (token.isPresent()) {
 					commentToTheVideo();
 				}
 				break;
 			case 5:
 				break;
 				case 6:
-					user = isLoggedIn(user);
-					if (user.isPresent()) {
-						likeController.dislikeTheVideo(video, user.get());
+					token = isLoggedIn();
+					if (token.isPresent()) {
+						var likeRequest = new DtoLikeRequest(video.getId(), token.get());
+						likeController.dislikeTheVideo(likeRequest);
 					}
 					break;
 			case 7:
-				user = isLoggedIn(user);
-				if (user.isPresent()) {
-					likeController.softDeleteLike(video, user.get());
+				token = isLoggedIn();
+				if (token.isPresent()) {
+					var likeRequest = new DtoLikeRequest(video.getId(), token.get());
+					likeController.softDeleteLike(likeRequest);
 				}
 				break;
 			case 8:
@@ -118,11 +119,12 @@ public class WatchModule {
 	private void commentToTheVideo() {
 		System.out.print("Enter your comment here: ");
 		String comment = scanner.nextLine();
+		DtoComment
 		commentController.comment(video, user.get(), comment);
 	}
 	
-	private Optional<User> isLoggedIn(Optional<User> user) {
-		if (user.isEmpty()) {
+	private Optional<String> isLoggedIn() {
+		if (token.isEmpty()) {
 			System.out.println("You have to log in or register to like a video");
 			System.out.println("""
 					                   1. Login
@@ -133,12 +135,15 @@ public class WatchModule {
 				case 0:
 					return Optional.empty();
 				case 1:
-					return new LoginMenu().loginModule();
+					return MainMenu.getInstance().login();
 				case 2:
 					new RegisterMenu().register();
 			}
 		}
-		return user;
+		return token;
 		
+	}
+	public Integer choice(){
+		return MainMenu.getInstance().choice();
 	}
 }

@@ -5,8 +5,6 @@ package com.ajwalker.module;
 import com.ajwalker.controller.UserController;
 import com.ajwalker.dto.request.DtoUserLoginRequest;
 import com.ajwalker.dto.response.DtoUserLoginResponse;
-import com.ajwalker.entity.User;
-import com.ajwalker.repository.UserRepository;
 
 import java.util.Optional;
 import java.util.Scanner;
