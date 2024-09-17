@@ -1,7 +1,8 @@
 package com.ajwalker.service;
 
-import com.ajwalker.dto.response.DtoUserLoginResponse;
-import com.ajwalker.dto.response.DtoVideoThumbnail;
+import com.ajwalker.dto.request.DtoTokenRequest;
+import com.ajwalker.dto.request.DtoVideoNameFilterRequest;
+import com.ajwalker.dto.response.DtoVideoThumbnailResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.entity.Video;
 import com.ajwalker.dto.response.DtoVideoDetailed;
@@ -44,31 +45,40 @@ public class VideoService {
         return videoRepository.findById(id);
     }
     
-    public List<DtoVideoThumbnail> showAllVideos() {
+    public List<DtoVideoThumbnailResponse> showAllVideos() {
         List<Video> all = findAll();
         return videoToDto(all);
     }
     
-    public List<DtoVideoThumbnail> showByName(String videoTitle) {
+    public List<DtoVideoThumbnailResponse> showByName(DtoVideoNameFilterRequest filterRequest) {
+        String videoTitle = filterRequestToVideoTitle(filterRequest);
         List<Video> videos = videoRepository.findByTitle(videoTitle);
         return videoToDto(videos);
     }
     
-    public List<DtoVideoThumbnail> videoToDto(List<Video> all){
+    private String filterRequestToVideoTitle(DtoVideoNameFilterRequest filterRequest) {
+        return filterRequest.getFilter();
+    }
+    
+    public List<DtoVideoThumbnailResponse> videoToDto(List<Video> all){
         return all.stream().map(
                 video -> {
                     Optional<User> optCreator = UserService.getInstance().findById(video.getCreator_id());
                     String creatorUsername;
                     if (optCreator.isPresent()) {
                         creatorUsername = optCreator.get().getUsername();
-                        return new DtoVideoThumbnail(video.getTitle(), creatorUsername, video.getId());
+                        return new DtoVideoThumbnailResponse(video.getTitle(), creatorUsername, video.getId());
                     }
                     else return null;
                 }).toList();
     }
     
-    public List<DtoVideoThumbnail> showMyVideos(DtoUserLoginResponse user) {
-        List<Video> videos = videoRepository.findByCreatorId(user);
+    public List<DtoVideoThumbnailResponse> showMyVideos(DtoTokenRequest tokenRequest) {
+        String token = tokenRequest.getToken();
+        Optional<User> optUser = UserService.getInstance().getUserIdByToken(token);
+        if (optUser.isEmpty()) throw new RuntimeException("No such user in db by token(service)");
+        User user = optUser.get();
+        List<Video> videos = videoRepository.findByCreatorId(user.getId());
         return videoToDto(videos);
     }
 	

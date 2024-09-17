@@ -1,12 +1,12 @@
 package com.ajwalker.module;
 
 import com.ajwalker.controller.VideoController;
-import com.ajwalker.dto.response.DtoUserLoginResponse;
-import com.ajwalker.dto.response.DtoVideoThumbnail;
+import com.ajwalker.dto.request.DtoTokenRequest;
+import com.ajwalker.dto.request.DtoVideoNameFilterRequest;
+import com.ajwalker.dto.response.DtoVideoThumbnailResponse;
 import com.ajwalker.entity.Video;
 import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.model.VideoModel;
-import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class VideoModule {
 	private Optional<String> token;
 	private Scanner scanner = new Scanner(System.in);
 	private VideoController videoController = VideoController.getInstance();
-	private List<DtoVideoThumbnail> videosToWatch = new ArrayList<DtoVideoThumbnail>();
+	private List<DtoVideoThumbnailResponse> videosToWatch = new ArrayList<>();
 	
 	private Integer choice(){ //TODO alt katmandan üst katmana ilerleme, yeni bir sınıf aç choice'ı oraya koy
 		return MainMenu.getInstance().choice();
@@ -60,11 +60,11 @@ public class VideoModule {
 						break;
 					}
 				}
-				videosToWatch = showMyVideos(token);
+				videosToWatch = showMyVideos();
 				break;
-				case 4:
-					// show what's trending
-					break;
+			case 4:
+				// show what's trending
+				break;
 			case 5:
 				chooseVideoToWatch();
 				break;
@@ -100,27 +100,30 @@ public class VideoModule {
 		}while(opt != 0);
 	}
 	
-	private List<DtoVideoThumbnail> showMyVideos(Optional<> user) {
-		
-		List<DtoVideoThumbnail> videos = videoController.showMyVideos(user);
+	private List<DtoVideoThumbnailResponse> showMyVideos() {
+		if (token.isEmpty()) throw new RuntimeException("Problem occured when trying to obtain the user token...(videomodule)");
+		DtoTokenRequest tokenRequest = new DtoTokenRequest(token.get());
+		List<DtoVideoThumbnailResponse> videos = videoController.showMyVideos(tokenRequest);
 		printVideos(videos);
 		return videos;
 	}
 	
-	private List<DtoVideoThumbnail> filterByTitle() {
+	private List<DtoVideoThumbnailResponse> filterByTitle() {
 		System.out.print("Apply filter> ");
-		List<DtoVideoThumbnail> videos = videoController.showByName(scanner.nextLine());
+		DtoVideoNameFilterRequest filterRequest = new DtoVideoNameFilterRequest(scanner.nextLine());
+		List<DtoVideoThumbnailResponse> videos = videoController.showByName(filterRequest);
 		printVideos(videos);
 		return videos;
 	}
 	
-	private List<DtoVideoThumbnail> showAllVideos() {
-		List<DtoVideoThumbnail> videos = videoController.showAllVideos();
+	private List<DtoVideoThumbnailResponse> showAllVideos() {
+		List<DtoVideoThumbnailResponse> videos = videoController.showAllVideos();
 		printVideos(videos);
 		return videos;
 	}
 	
-	private void printVideos(List<DtoVideoThumbnail> videos){
+	// TODO bunu bir modele entegre et
+	private void printVideos(List<DtoVideoThumbnailResponse> videos){
 		System.out.println("####### VIDEOS #######");
 		for (int i = 0; i < videos.size(); i++) {
 			System.out.println((i + 1) + ". Video");

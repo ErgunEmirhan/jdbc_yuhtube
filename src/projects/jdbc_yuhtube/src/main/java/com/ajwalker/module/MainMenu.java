@@ -12,7 +12,6 @@ public class MainMenu {
 		return instance;
 	}
 	private  Optional<String> token;
-	private  LoginMenu loginMenu = new LoginMenu();
 	private  Scanner scanner = new Scanner(System.in);
 	
 	public  void mainMenu(){
@@ -23,7 +22,7 @@ public class MainMenu {
 		} while(opt != 0);
 		System.out.println(opt);
 	}
-	public static int anonymousMainMenu(){
+	public int anonymousMainMenu(){
 		System.out.println("""
 				                   YuhTube
 				                   Main Menu
@@ -31,7 +30,6 @@ public class MainMenu {
 				                   2. Register
 				                   3. Watch Videos
 				                   0. Exit
-				                   
 				                   """);
 		return mainMenuOptions(choice());
 	}
@@ -58,7 +56,7 @@ public class MainMenu {
 	}
 	
 	public Optional<String> login() {
-		Optional<DtoUserLoginResponse> tempResponse = new LoginMenu().loginModule();
+		Optional<DtoUserLoginResponse> tempResponse = LoginMenu.getInstance().loginModule();
 		tempResponse.ifPresent(this::loginRequestToToken);
 		return token;
 	}

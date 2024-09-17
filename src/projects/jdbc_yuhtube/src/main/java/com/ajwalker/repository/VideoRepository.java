@@ -66,8 +66,8 @@ public class VideoRepository implements ICRUD<Video> {
         return resultSet.map(set -> generateList(Video.class, set)).orElseGet(ArrayList::new);
     }
     
-    public List<Video> findByCreatorId(User user) {
-        sql = "SELECT * FROM " + TABLE_NAME +" WHERE creator_id = "+ user.getId() +" ORDER BY id DESC";
+    public List<Video> findByCreatorId(Long userId) {
+        sql = "SELECT * FROM " + TABLE_NAME +" WHERE creator_id = "+ userId +" ORDER BY id DESC";
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         return resultSet.map(set -> generateList(Video.class, set)).orElseGet(ArrayList::new);
     }

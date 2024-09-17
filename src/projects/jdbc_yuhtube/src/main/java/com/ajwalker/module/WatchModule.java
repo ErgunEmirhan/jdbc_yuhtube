@@ -12,7 +12,6 @@ import com.ajwalker.model.VideoModel;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static com.ajwalker.module.MainMenu.choice;
 
 public class WatchModule {
 	private VideoModel videoModel;
@@ -21,8 +20,8 @@ public class WatchModule {
 	private CommentController commentController = CommentController.getInstance();
 	private VideoController videoController = VideoController.getInstance();
 	private Video video;
+	private Optional<String> user;
 	
-	private Optional<DtoUserLoginResponse> user;
 	Thread watchThread = new Thread(new Runnable() {
 		@Override
 		public void run() {
@@ -40,11 +39,11 @@ public class WatchModule {
 		watchThread.setDaemon(true);
 	}
 	
-	public void watchMenu(VideoModel videoModel, Optional<DtoUserLoginResponse> user) {
+	public void watchMenu(VideoModel videoModel, Optional<String> token) {
 		watchThread.start();
 		this.videoModel = videoModel;
 		this.video = videoModel.getDtoVideoDetailed().getVideo();
-		this.user = user;
+		this.user = token;
 		int opt;
 		do {
 			System.out.printf("### %s ###\n", video.getTitle()); // videonun kaç like ve dislike'ı var
@@ -61,7 +60,7 @@ public class WatchModule {
 					                   9. Show Video Statistics
 					                   0. Go Back
 					                   """); // 8. abone ol
-			opt = choice();
+			opt = MainMenu.getInstance().choice();
 			watchMenuOptions(opt);
 		} while (opt != 0);
 	}

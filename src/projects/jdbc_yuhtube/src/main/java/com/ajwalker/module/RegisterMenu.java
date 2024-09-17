@@ -2,6 +2,7 @@ package com.ajwalker.module;
 
 
 import com.ajwalker.controller.UserController;
+import com.ajwalker.dto.request.DtoUserRegisterRequest;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
 
@@ -17,8 +18,8 @@ public class RegisterMenu {
 		String email = createEmail();
 		String username = createUsername();
 		String password = createPassword();
-		User user = new User(username, email, password);
-		if (userController.save(user)) {
+		var registerRequest = new DtoUserRegisterRequest(email, password, username);
+		if (userController.save(registerRequest)) {
 			System.out.println("Successfulled");
 		}
 	}

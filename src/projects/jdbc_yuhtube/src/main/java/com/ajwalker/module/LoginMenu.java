@@ -12,6 +12,11 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class LoginMenu {
+	private static LoginMenu instance = new LoginMenu();
+	private LoginMenu() {}
+	public static LoginMenu getInstance() {
+		return instance;
+	}
 	private Scanner scanner = new Scanner(System.in);
 	private UserController userController = UserController.getInstance();
 	

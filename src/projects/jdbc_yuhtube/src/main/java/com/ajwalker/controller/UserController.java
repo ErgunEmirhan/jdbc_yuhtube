@@ -1,6 +1,7 @@
 package com.ajwalker.controller;
 
 import com.ajwalker.dto.request.DtoUserLoginRequest;
+import com.ajwalker.dto.request.DtoUserRegisterRequest;
 import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
@@ -23,9 +24,9 @@ public class UserController {
         return instance;
     }
 
-    public boolean save(User user) {
+    public boolean save(DtoUserRegisterRequest registerRequest) {
 	    try {
-		    return userService.save(user);
+		    return userService.save(registerRequest);
 	    }
 	    catch (Exception e) {
             System.out.println("failed(controller level)..." + e.getMessage());

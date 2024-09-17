@@ -3,12 +3,12 @@ package com.ajwalker.dto.response;
 
 
 
-public class DtoVideoThumbnail {
+public class DtoVideoThumbnailResponse {
 	Long videoId;
 	String videoTitle;
 	String creatorUsername;
 	
-	public DtoVideoThumbnail(String videoTitle, String creatorUsername, Long videoId) {
+	public DtoVideoThumbnailResponse(String videoTitle, String creatorUsername, Long videoId) {
 		this.videoTitle = videoTitle;
 		this.creatorUsername = creatorUsername;
 		this.videoId = videoId;

@@ -3,10 +3,10 @@ package com.ajwalker.service;
 import com.ajwalker.database.DatabaseHelper;
 import com.ajwalker.database.SQLQueryBuilder;
 import com.ajwalker.dto.request.DtoUserLoginRequest;
+import com.ajwalker.dto.request.DtoUserRegisterRequest;
 import com.ajwalker.dto.response.DtoUserLoginResponse;
 import com.ajwalker.entity.User;
 import com.ajwalker.repository.UserRepository;
-import com.ajwalker.utility.ICRUD;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -27,10 +27,19 @@ public class UserService {
         return instance;
     }
 
-    public boolean save(User user) {
+    public boolean save(DtoUserRegisterRequest registerRequest) {
+        User user = registerRequestToUser(registerRequest);
         return userRepository.save(user);
     }
-
+    
+    private User registerRequestToUser(DtoUserRegisterRequest registerRequest) {
+        String username = registerRequest.getUsername();
+        String password = registerRequest.getPassword();
+        String email = registerRequest.getEmail();
+        User user = new User(username, password, email);
+        return user;
+    }
+    
     public boolean update(User user) {
         return userRepository.update(user);
     }
@@ -70,5 +79,9 @@ public class UserService {
         }
         String finalUsername = optUser.get().getUsername();
         return Optional.ofNullable(new DtoUserLoginResponse(finalUsername));
+    }
+    
+    public Optional<User> getUserIdByToken(String token) {
+        return findByUsername(token);
     }
 }

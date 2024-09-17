@@ -1,8 +1,8 @@
 package com.ajwalker.controller;
 
-import com.ajwalker.dto.response.DtoUserLoginResponse;
-import com.ajwalker.dto.response.DtoVideoThumbnail;
-import com.ajwalker.entity.User;
+import com.ajwalker.dto.request.DtoTokenRequest;
+import com.ajwalker.dto.request.DtoVideoNameFilterRequest;
+import com.ajwalker.dto.response.DtoVideoThumbnailResponse;
 import com.ajwalker.entity.Video;
 import com.ajwalker.dto.response.DtoVideoDetailed;
 import com.ajwalker.service.VideoService;
@@ -45,7 +45,7 @@ public class VideoController {
         return videoService.findById(id);
     }
     
-    public List<DtoVideoThumbnail> showAllVideos() {
+    public List<DtoVideoThumbnailResponse> showAllVideos() {
 	    try {
 		   return videoService.showAllVideos();
 	    }
@@ -55,9 +55,9 @@ public class VideoController {
 	    }
     }
     
-    public List<DtoVideoThumbnail> showByName(String videoTitle) {
+    public List<DtoVideoThumbnailResponse> showByName(DtoVideoNameFilterRequest filterRequest) {
         try {
-            return videoService.showByName(videoTitle);
+            return videoService.showByName(filterRequest);
         }
         catch(Exception e){
             System.out.println("could not show the videos by title(controller)..." + e.getMessage());
@@ -66,9 +66,9 @@ public class VideoController {
     }
     
     
-    public List<DtoVideoThumbnail> showMyVideos(DtoUserLoginResponse user) {
+    public List<DtoVideoThumbnailResponse> showMyVideos(DtoTokenRequest tokenRequest) {
         try{
-            return videoService.showMyVideos(user);
+            return videoService.showMyVideos(tokenRequest);
         }
         catch (Exception e) {
             System.out.println("Could not show your videos(controller)..." + e.getMessage());
